@@ -158,18 +158,22 @@ class QRCheck:
         #sentinel = Random.new().read(24)
         #cipher_rsa = PKCS1_v1_5.new(private_key)
         #message = cipher_rsa.decrypt(datab64,sentinel)
-        
-        key = b'YOURKEYGYOURKEYG'
-        ciphered_data = base64.b64decode(data)
-        cipher = AES.new(key, AES.MODE_ECB) # CFB mode
-        result = unpad(cipher.decrypt(ciphered_data), 16)
-        data=str(result,'utf-8')
-        
-        if(str(data)=="1970-01-01T01:00:00.000Z"):
-            result = -3 #admin
+        try
+            key = b'YOURKEYGYOURKEYG'
+            ciphered_data = base64.b64decode(data)
+            cipher = AES.new(key, AES.MODE_ECB) # CFB mode
+            result = unpad(cipher.decrypt(ciphered_data), 16)
+            data=str(result,'utf-8')
+
+            d = list(data)
+        except Exception:
+            result = -1  # incorrect
             return result
         
-        d = list(data)
+        if(str(data)=="0"):
+            result = -3 #admin
+            return result
+
         
         """
         numd = []
@@ -219,13 +223,13 @@ class QRCheck:
          
         #algorithm_check_1
         
-        if len(d)==24:
+        if len(d)==10:
             result = 1
         else:
             result = -1 #incorrect
             return result
         
-        if d[10]=='T':
+        if d[0]=='1':
             result = 1
         else:
             result = -1 #incorrect

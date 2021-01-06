@@ -173,6 +173,9 @@ class QRCheck:
         if(str(data)=="0"):
             result = -3 #admin
             return result
+        if (str(data) == "666"):
+            result = -4  #destroy
+            return result
 
         
         """

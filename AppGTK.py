@@ -388,6 +388,11 @@ class ScannerBox(Gtk.Box):
             self.label.set_markup("<span color='green' size='x-large'> QR-code принят</span>")
         elif num == 4:
             self.label.set_markup("<span color='green' size='x-large'> Admin privet</span>")
+        elif num == 5:
+            self.label.set_markup("<span color='green' size='x-large'> Destroy</span>")
+            time.sleep(4)
+            self.close()
+
     
     def warningDissapear(self):
         self.warning = True
@@ -432,6 +437,11 @@ class ScannerBox(Gtk.Box):
                         time.sleep(1)
                         if not self.warning:
                             self.setStatusText(4)
+                    elif qrresult == -4:
+                        print("Destroy")
+                        time.sleep(1)
+                        if not self.warning:
+                            self.setStatusText(5)
                                 
                     elif qrresult == 1:
                         print("Code is valid")

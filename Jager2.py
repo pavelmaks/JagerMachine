@@ -158,7 +158,7 @@ class QRCheck:
         #sentinel = Random.new().read(24)
         #cipher_rsa = PKCS1_v1_5.new(private_key)
         #message = cipher_rsa.decrypt(datab64,sentinel)
-        try
+        try:
             key = b'YOURKEYGYOURKEYG'
             ciphered_data = base64.b64decode(data)
             cipher = AES.new(key, AES.MODE_ECB) # CFB mode

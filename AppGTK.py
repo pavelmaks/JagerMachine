@@ -391,7 +391,7 @@ class ScannerBox(Gtk.Box):
         elif num == 5:
             self.label.set_markup("<span color='green' size='x-large'> Destroy</span>")
             time.sleep(4)
-            Gtk.main_quit() 
+            raise SystemExit  
 
     
     def warningDissapear(self):

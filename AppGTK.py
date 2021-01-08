@@ -73,7 +73,7 @@ class InstructionBox(Gtk.Box):
         #self.servo.close()
         print('Instruction close')
         
-    def setStatusText(self, num):
+    def setStatusText(self, num):#изменение фона и надписей
         if num == 0: #0 = idle, 1 = invalid, 2 = used
             self.label.set_markup("<span color='green' size='x-large'>QR-code активирован\nУстановите емкость\nи нажмите на экран</span>")
             GLib.idle_add(self.setBackground, 0)
@@ -84,7 +84,7 @@ class InstructionBox(Gtk.Box):
             self.label.set_markup("<span color='green' size='x-large'>Процесс разлива окончен</span>")
             GLib.idle_add(self.setBackground, 2)
   
-    def setBackground(self, num):
+    def setBackground(self, num):#изменение фона
         if num == 0:
             self.background.set_from_file("disp_start.png")
         elif num == 1:
@@ -98,7 +98,7 @@ class InstructionBox(Gtk.Box):
         print("toIdle")
 
 
-    def servoGo(self, widget):
+    def servoGo(self, widget):#запуск процесса розлива
         
         if self.busy:
             return
@@ -107,7 +107,7 @@ class InstructionBox(Gtk.Box):
         self.busy = True
         threading.Thread(target=self.servoAct, args=()).start()
 
-    def servoAct(self):
+    def servoAct(self):#запуск налива и возвращение в первую форму
         servoTime=j.get_setting(j.path, 'Settings', 'servoTime')
         print('servoGo')
         self.servo.setActPosition()
@@ -134,7 +134,7 @@ class InstructionBox(Gtk.Box):
         self.servo.close()
         print('close instr')
 
-class IdleBox(Gtk.Box):
+class IdleBox(Gtk.Box):#стартовая форма
     
     def __init__(self, parent):   
         Gtk.Box.__init__(self)
@@ -168,7 +168,7 @@ class IdleBox(Gtk.Box):
 
         button = Gtk.Button(label='Нажмите, чтобы начать')
         button.set_property("opacity", 0)
-        button.connect("clicked", self.toScanner)
+        button.connect("clicked", self.toScanner) # привязка тригера на переход к qr коду
           
         overlay.add_overlay(button)
         
@@ -191,7 +191,7 @@ class IdleBox(Gtk.Box):
     def onClose(self):
         print('Idle close')
 
-    def toScanner(self, widget):
+    def toScanner(self, widget): # функция перехода к QR коду
         self.parent.openBox(self, 1)
 
     def close(self):
@@ -300,7 +300,7 @@ class OneMorePlayer(Gtk.Box):
  
     
 
-class ScannerBox(Gtk.Box):
+class ScannerBox(Gtk.Box):#форма сканирования qr кода
     def __init__(self, parent):
         Gtk.Box.__init__(self)
         
@@ -407,7 +407,7 @@ class ScannerBox(Gtk.Box):
             GLib.idle_add(self.showFrame)
             time.sleep(0.1)
 
-    def qrCheck(self):
+    def qrCheck(self):#функция проверки qr кода и выдачи результата
         
         time.sleep(1)
         
@@ -458,7 +458,7 @@ class ScannerBox(Gtk.Box):
         self.qrcheck.close()
                 
 
-    def showFrame(self):
+    def showFrame(self):#демонстрация кадра на экран
         
         #print('tick')
         frame = self.camera.getFrame()
@@ -494,7 +494,7 @@ class ScannerBox(Gtk.Box):
         self.update = False
         
      
-class AppWindow(Gtk.Window):
+class AppWindow(Gtk.Window):#главная форма
     def __init__(self):
         
         
@@ -567,7 +567,7 @@ class AppWindow(Gtk.Window):
         #
     
 class main:
-    def __init__(self):
+    def __init__(self): #консруктор
         self.win = AppWindow()
         self.win.connect("destroy", self.close)
         self.win.fullscreen()

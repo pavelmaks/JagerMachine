@@ -129,7 +129,7 @@ class ServoAct:
         self.p.stop()
         GPIO.cleanup()
 
-class QRCheck:
+class QRCheck:#проверка правильности
     
     def __init__(self):
         self.subd = SUBD()
@@ -285,7 +285,7 @@ class SUBD:
             self.curs=None
         
         
-class QRDetect:
+class QRDetect:#класс распознования кода
     def __init__(self):
         self.detector = cv2.QRCodeDetector()
         
@@ -305,7 +305,7 @@ class QRDetect:
         return None
     
     
-class CameraCapture:
+class CameraCapture: # класс картинки с камеры
     def __init__(self):
         self.vs = None
         self.fps = None

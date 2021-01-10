@@ -454,7 +454,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         if not self.warning:
                             self.setStatusText(5)
                         self.update = False
-                        self.close()
+                        self.parent.close()
                     elif qrresult == -5:
                         print("Settings")
                         time.sleep(1)

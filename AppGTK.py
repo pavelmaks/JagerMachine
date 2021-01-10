@@ -391,7 +391,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         elif num == 5:
             self.label.set_markup("<span color='green' size='x-large'> Destroy</span>")
             time.sleep(4)
-            Gtk.Window.close()
+            m.close()
 
     
     def warningDissapear(self):

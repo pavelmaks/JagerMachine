@@ -1,9 +1,9 @@
 import re
 
-s = "1537 2.5,10,22,50,10"
+s = "1537,2.5,10,22,50,10"
 
 nums = re.findall(r'\d*\.\d+|\d+', s)
 
 nums = [float(i) for i in nums]
 
-print(s[:3])
+print(nums)

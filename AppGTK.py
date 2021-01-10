@@ -195,8 +195,8 @@ class IdleBox(Gtk.Box):#стартовая форма
     def toScanner(self, widget): # функция перехода к QR коду
         self.parent.openBox(self, 1)
 
-    def close(self):
-        print('close idle')
+    # def close(self):
+    #     print('close idle')
 
 
 class OneMorePlayer(Gtk.Box):
@@ -453,7 +453,8 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         time.sleep(1)
                         if not self.warning:
                             self.setStatusText(5)
-                        Gtk.Window.close()
+                        self.update = False
+                        self.close()
                     elif qrresult == -5:
                         print("Settings")
                         time.sleep(1)
@@ -510,9 +511,9 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
             #print("[INFO] caught a RuntimeError") 
          
          
-    def close(self):
-        print('close scanner')
-        self.update = False
+    # def close(self):
+    #     print('close scanner')
+    #     self.update = False
         
      
 class AppWindow(Gtk.Window):#главная форма

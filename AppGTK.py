@@ -453,7 +453,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         time.sleep(1)
                         if not self.warning:
                             self.setStatusText(5)
-                        m.win.close()
+                        Gtk.Window.close()
                     elif qrresult == -5:
                         print("Settings")
                         time.sleep(1)

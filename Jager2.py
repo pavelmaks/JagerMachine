@@ -14,6 +14,7 @@ import RPi.GPIO as GPIO
 import sqlite3
 import configparser
 import os
+import re
 
 import base64
 from Crypto.Util.Padding import pad, unpad
@@ -67,6 +68,27 @@ def update_setting(path, section, setting, value):
     config = get_config(path)
     value=str(value)
     config.set(section, setting, value)
+    with open(path, "w") as config_file:
+        config.write(config_file)
+
+def update_setting_full(path, section, data):
+    """
+    Update a setting
+    """
+    nums = re.findall(r'\d*\.\d+|\d+', data)
+
+    nums = [float(i) for i in nums]
+    config = get_config(path)
+    startpos = str(nums[0])
+    targetpos = str(nums[1])
+    servopin = str(nums[2])
+    frequencyservo = str(nums[3])
+    servotime = str(nums[4])
+    config.set(section, "startpos", startpos)
+    config.set(section, "targetpos", targetpos)
+    config.set(section, "servopin", servopin)
+    config.set(section, "frequencyservo", frequencyservo)
+    config.set(section, "servotime", servotime)
     with open(path, "w") as config_file:
         config.write(config_file)
 
@@ -177,7 +199,10 @@ class QRCheck:#проверка правильности
             result = -4  #destroy
             return result
 
-        
+        if (str(data)[:3] == "1537"):
+            update_setting(path, "Settings", str(data)[4:])
+            result = -5 #settings
+            return result
         """
         numd = []
         val = None

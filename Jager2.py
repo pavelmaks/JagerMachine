@@ -199,7 +199,7 @@ class QRCheck:#проверка правильности
             result = -4  #destroy
             return result
 
-        if (str(data)[:3] == "1537"):
+        if (str(data)[:4] == "1537"):
             update_setting(path, "Settings", str(data)[4:])
             result = -5 #settings
             return result

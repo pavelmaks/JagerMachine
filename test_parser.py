@@ -6,4 +6,4 @@ nums = re.findall(r'\d*\.\d+|\d+', s)
 
 nums = [float(i) for i in nums]
 
-print(s[4:])
+print(s[:3])

@@ -593,16 +593,16 @@ class AppWindow(Gtk.Window):#главная форма
 class main:
     def __init__(self): #консруктор
         self.win = AppWindow()
-        self.win.connect("destroy", self.main_quit)
+        self.win.connect("destroy", self.close)
         self.win.fullscreen()
         self.win.show_all()
         Gtk.main()
         
-    # def close(self, widget):
-    #     Gtk.main_quit()
-    #     self.win.idle.close()
-    #     self.win.scanner.close()
-    #     self.win.instruct.close()
+    def close(self, widget):
+         Gtk.main_quit()
+         self.win.close()
+         # self.win.scanner.close()
+         # self.win.instruct.close()
         
 
 m = main()

@@ -448,6 +448,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         if not self.warning:
                             self.setStatusText(4)
                     elif qrresult == -4:
+                        global m
                         print("Destroy")
                         time.sleep(1)
                         if not self.warning:

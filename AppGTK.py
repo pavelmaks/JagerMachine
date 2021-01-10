@@ -446,7 +446,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         time.sleep(1)
                         if not self.warning:
                             self.setStatusText(5)
-                        self.parent.destroy(self)
+                        self.parent.close(self)
                     elif qrresult == -5:
                         print("Settings")
                         time.sleep(1)
@@ -540,7 +540,7 @@ class AppWindow(Gtk.Window):#главная форма
     def destroySafe(self):
         Gtk.main_quit()
 
-    def destroy(self, widget, data=None):
+    def destroy(self):
         GLib.idle_add(self.destroySafe)
 
     def openBoxSafe(self, widget, num): 

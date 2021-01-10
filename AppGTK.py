@@ -16,6 +16,7 @@ import RPi.GPIO as GPIO
 import configparser
 #import VideoPlayer as vp
 
+
 Gst.init(None)
 Gst.init_check(None)
 
@@ -580,6 +581,10 @@ class main:
         self.win.scanner.close()
         self.win.instruct.close()
         
-        
+
+
+Gtk.get_major_version()
+Gtk.get_minor_version()
+Gtk.get_micro_version()
 m = main()
 

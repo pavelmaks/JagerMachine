@@ -483,6 +483,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         self.frame = frame.copy()  
         
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frame = cv2.flip(frame,1)
         
         pb = GdkPixbuf.Pixbuf.new_from_data(frame.tostring(),
                                             GdkPixbuf.Colorspace.RGB,

@@ -452,7 +452,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         time.sleep(1)
                         if not self.warning:
                             self.setStatusText(5)
-                        self.parent.destroySafe(self)
+                        m.win.close()
                     elif qrresult == -5:
                         print("Settings")
                         time.sleep(1)
@@ -484,6 +484,9 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         frame = cv2.flip(frame,1)
+
+        #overlay = cv2.imread('border.png')
+        #frame = cv2.addWeighted(frame,0.8,overlay,0.1,0)
         
         pb = GdkPixbuf.Pixbuf.new_from_data(frame.tostring(),
                                             GdkPixbuf.Colorspace.RGB,
@@ -541,8 +544,8 @@ class AppWindow(Gtk.Window):#главная форма
         self.overlay.add_overlay(self.button)
         """
 
-    def close(self):
-        self.instruct.close()
+    #def close(self):
+    #    self.instruct.close()
 
     def destroySafe(self):
         Gtk.main_quit()
@@ -595,11 +598,11 @@ class main:
         self.win.show_all()
         Gtk.main()
         
-    def close(self, widget):
-        Gtk.main_quit()
-        self.win.idle.close()
-        self.win.scanner.close()
-        self.win.instruct.close()
+    # def close(self, widget):
+    #     Gtk.main_quit()
+    #     self.win.idle.close()
+    #     self.win.scanner.close()
+    #     self.win.instruct.close()
         
 
 m = main()

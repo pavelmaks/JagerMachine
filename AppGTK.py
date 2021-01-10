@@ -16,6 +16,7 @@ import RPi.GPIO as GPIO
 import configparser
 #import VideoPlayer as vp
 
+
 Gst.init(None)
 Gst.init_check(None)
 
@@ -391,10 +392,10 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         elif num == 5:
             self.label.set_markup("<span color='green' size='x-large'> Destroy</span>")
             time.sleep(4)
-            raise SystemExit
         elif num == 6:
             self.label.set_markup("<span color='green' size='x-large'> Настройки изменены</span>")
             time.sleep(3)
+
 
     
     def warningDissapear(self):
@@ -588,6 +589,6 @@ class main:
         self.win.scanner.close()
         self.win.instruct.close()
         
-        
+
 m = main()
 

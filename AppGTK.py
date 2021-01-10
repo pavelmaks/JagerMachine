@@ -390,7 +390,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         elif num == 4:
             self.label.set_markup("<span color='green' size='x-large'> Admin privet</span>")
         elif num == 5:
-            self.label.set_markup("<span color='green' size='x-large'> Destroy</span>")
+            self.label.set_markup("<span style ='text-align: center; bacground-color:red;' color='green' size='x-large'> Destroy</span>")
             time.sleep(4)
         elif num == 6:
             self.label.set_markup("<span color='green' size='x-large'> Настройки изменены</span>")

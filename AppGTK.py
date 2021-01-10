@@ -416,7 +416,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         time.sleep(1)
 
         start_time = time.time()
-        
+
         while self.update:   
             if self.frame is not None:
             
@@ -424,8 +424,10 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
             
                 qrdata = self.qrdetect.detect(self.frame)
                    
-                if start_time-time.time() > 30:
-                    self.toIdle()
+                if time.time()-start_time > 30:
+                    self.update = False
+                    time.sleep(0.5)
+                    self.toIdle(None)
 
                 if qrdata is not None:
                     qrresult = self.qrcheck.check(qrdata)

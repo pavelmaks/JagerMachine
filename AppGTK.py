@@ -302,10 +302,10 @@ class OneMorePlayer(Gtk.Box):
     
 
 class ScannerBox(Gtk.Box):#форма сканирования qr кода
-    def __init__(self, parent):
+    def __init__(self, par):
         Gtk.Box.__init__(self)
         
-        self.parent = parent
+        self.par = par
         
         self.camera = j.CameraCapture()
              
@@ -454,7 +454,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         if not self.warning:
                             self.setStatusText(5)
                         self.update = False
-                        self.parent.close()
+                        self.par.close()
                     elif qrresult == -5:
                         print("Settings")
                         time.sleep(1)

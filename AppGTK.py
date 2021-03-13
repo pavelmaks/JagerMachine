@@ -359,7 +359,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         threading.Thread(target=self.startPreview, args=()).start()
         threading.Thread(target=self.qrCheck, args=()).start()
  
-        #self.parent.openBox(self, 0)
+        #self.par.openBox(self, 0)
               
     def onClose(self):
         print('Scanner close')
@@ -368,12 +368,12 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         self.update = False
 
     def toIdle(self, widget):
-        self.parent.openBox(self, 0)
+        self.par.openBox(self, 0)
         print("toIdle")
     
     
     def toInstruction(self, widget):
-        self.parent.openBox(self, 2)
+        self.par.openBox(self, 2)
         print('toInstruction')
     
     def setStatusText(self, num):

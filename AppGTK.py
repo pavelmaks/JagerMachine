@@ -395,6 +395,9 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         elif num == 6:
             self.label.set_markup("<span color='green' size='x-large'> Настройки изменены</span>")
             time.sleep(3)
+        elif num > 6:
+            self.label.set_markup("<span color='green' size='x-large'> Проливка "+str(num)+" секунд</span>")
+            time.sleep(3)
 
 
     
@@ -460,6 +463,21 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         time.sleep(1)
                         if not self.warning:
                             self.setStatusText(6)
+
+                    elif qrresult < -6:
+                        print("Proliv")
+                        time.sleep(1)
+                        if not self.warning:
+                            self.setStatusText(-qrresult)
+                        j.ServoAct.setActPosition()
+                        time.sleep(0.4)
+                        time.sleep(qrresult)
+                        j.ServoAct.setIdlePosition()
+                        time.sleep(0.4)
+                        j.ServoAct.hold()
+                        time.sleep(2)
+                        start_time = time.time()
+
                                 
                     elif qrresult == 1:
                         print("Code is valid")

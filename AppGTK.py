@@ -24,8 +24,8 @@ class InstructionBox(Gtk.Box):
  
     def __init__(self, parent):
         Gtk.Box.__init__(self)
-        
-        self.servo = j.ServoAct()
+
+        self.servo = None
         
         self.parent = parent
         
@@ -110,8 +110,9 @@ class InstructionBox(Gtk.Box):
 
     def servoAct(self):#запуск налива и возвращение в первую форму
         servoTime=j.get_setting(j.path, 'Settings', 'servoTime')
+        servo = j.ServoAct()
         print('servoGo')
-        self.servo.setActPosition()
+        servo.setActPosition()
         time.sleep(0.4)
         
         print('servoOnPlace')
@@ -119,12 +120,13 @@ class InstructionBox(Gtk.Box):
         time.sleep(servoTime)
         
         print('servoGoHome')
-        self.servo.setIdlePosition()
+        servo.setIdlePosition()
         time.sleep(0.4)
         
         print('servoEnd')
-        self.servo.hold()
+        servo.hold()
         time.sleep(2)
+
         self.setStatusText(self.setStatusText(2))
         
         time.sleep(7)
@@ -313,7 +315,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         self.qrcheck = j.QRCheck()
         self.frame = None
         self.scannerOn = True
-        self.servo = j.ServoAct()
+
         
         self.warning = False
         
@@ -470,12 +472,14 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         time.sleep(1)
                         if not self.warning:
                             self.setStatusText(-qrresult)
-                        self.servo.setActPosition()
+
+                        servo = j.ServoAct()
+                        servo.setActPosition()
                         time.sleep(0.4)
                         time.sleep(qrresult)
-                        self.servo.setIdlePosition()
+                        servo.setIdlePosition()
                         time.sleep(0.4)
-                        self.servo.hold()
+                        servo.hold()
                         time.sleep(2)
                         start_time = time.time()
 

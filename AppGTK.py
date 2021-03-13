@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#pavel idi nax i zaebalsi
 
 import gi
 import os

@@ -466,6 +466,12 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         time.sleep(1)
                         if not self.warning:
                             self.setStatusText(6)
+                        time.sleep(10)
+                        if not self.warning:
+                            self.setStatusText(0)
+                        start_time = time.time()
+
+
 
                     elif qrresult < -6:
                         print("Proliv")
@@ -476,12 +482,14 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         servo = j.ServoAct()
                         servo.setActPosition()
                         time.sleep(0.4)
-                        time.sleep(qrresult)
+                        time.sleep(-qrresult)
                         servo.setIdlePosition()
                         time.sleep(0.4)
                         servo.hold()
                         time.sleep(2)
                         start_time = time.time()
+                        if not self.warning:
+                            self.setStatusText(0)
 
                                 
                     elif qrresult == 1:

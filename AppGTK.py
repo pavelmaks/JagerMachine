@@ -313,6 +313,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         self.qrcheck = j.QRCheck()
         self.frame = None
         self.scannerOn = True
+        self.servo = j.ServoAct()
         
         self.warning = False
         
@@ -469,12 +470,12 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         time.sleep(1)
                         if not self.warning:
                             self.setStatusText(-qrresult)
-                        j.ServoAct.setActPosition()
+                        self.servo.setActPosition()
                         time.sleep(0.4)
                         time.sleep(qrresult)
-                        j.ServoAct.setIdlePosition()
+                        self.servo.setIdlePosition()
                         time.sleep(0.4)
-                        j.ServoAct.hold()
+                        self.servo.hold()
                         time.sleep(2)
                         start_time = time.time()
 

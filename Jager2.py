@@ -98,7 +98,7 @@ class ServoAct:
         self.targetPos = get_setting(path, 'Settings', 'targetPos')
         self.holdTime = 0.0
        
-        servo = servo = get_setting(path, 'Settings', 'servopin')
+        servo = get_setting(path, 'Settings', 'servopin')
 
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(servo, GPIO.OUT)

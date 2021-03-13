@@ -22,7 +22,7 @@ from Crypto.Cipher import AES
 
 
 
-path = "~/Desktop/settings.ini"
+path = "/home/pi/Desktop/settings.ini"
 
 def create_config(path):
     """

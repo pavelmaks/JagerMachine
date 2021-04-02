@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#pavel idi nax i zaebalsi
 
 import gi
 import os
@@ -24,8 +24,8 @@ class InstructionBox(Gtk.Box):
  
     def __init__(self, parent):
         Gtk.Box.__init__(self)
-        
-        self.servo = j.ServoAct()
+
+        self.servo = None
         
         self.parent = parent
         
@@ -110,8 +110,9 @@ class InstructionBox(Gtk.Box):
 
     def servoAct(self):#запуск налива и возвращение в первую форму
         servoTime=j.get_setting(j.path, 'Settings', 'servoTime')
+        servo = j.ServoAct()
         print('servoGo')
-        self.servo.setActPosition()
+        servo.setActPosition()
         time.sleep(0.4)
         
         print('servoOnPlace')
@@ -119,12 +120,13 @@ class InstructionBox(Gtk.Box):
         time.sleep(servoTime)
         
         print('servoGoHome')
-        self.servo.setIdlePosition()
+        servo.setIdlePosition()
         time.sleep(0.4)
         
         print('servoEnd')
-        self.servo.hold()
+        servo.hold()
         time.sleep(2)
+
         self.setStatusText(self.setStatusText(2))
         
         time.sleep(7)
@@ -313,6 +315,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         self.qrcheck = j.QRCheck()
         self.frame = None
         self.scannerOn = True
+
         
         self.warning = False
         
@@ -359,7 +362,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         threading.Thread(target=self.startPreview, args=()).start()
         threading.Thread(target=self.qrCheck, args=()).start()
  
-        #self.parent.openBox(self, 0)
+        #self.par.openBox(self, 0)
               
     def onClose(self):
         print('Scanner close')
@@ -368,12 +371,12 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         self.update = False
 
     def toIdle(self, widget):
-        self.parent.openBox(self, 0)
+        self.par.openBox(self, 0)
         print("toIdle")
     
     
     def toInstruction(self, widget):
-        self.parent.openBox(self, 2)
+        self.par.openBox(self, 2)
         print('toInstruction')
     
     def setStatusText(self, num):
@@ -394,6 +397,9 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
             time.sleep(4)
         elif num == 6:
             self.label.set_markup("<span color='green' size='x-large'> Настройки изменены</span>")
+            time.sleep(3)
+        elif num > 6:
+            self.label.set_markup("<span color='green' size='x-large'> Проливка "+str(num)+" секунд</span>")
             time.sleep(3)
 
 
@@ -460,6 +466,31 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         time.sleep(1)
                         if not self.warning:
                             self.setStatusText(6)
+                        time.sleep(10)
+                        if not self.warning:
+                            self.setStatusText(0)
+                        start_time = time.time()
+
+
+
+                    elif qrresult < -6:
+                        print("Proliv")
+                        time.sleep(1)
+                        if not self.warning:
+                            self.setStatusText(-qrresult)
+
+                        servo = j.ServoAct()
+                        servo.setActPosition()
+                        time.sleep(0.4)
+                        time.sleep(-qrresult)
+                        servo.setIdlePosition()
+                        time.sleep(0.4)
+                        servo.hold()
+                        time.sleep(2)
+                        start_time = time.time()
+                        if not self.warning:
+                            self.setStatusText(0)
+
                                 
                     elif qrresult == 1:
                         print("Code is valid")

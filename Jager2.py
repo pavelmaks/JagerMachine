@@ -22,7 +22,7 @@ from Crypto.Cipher import AES
 
 
 
-path = "settings.ini"
+path = "/home/pi/Desktop/settings.ini"
 
 def create_config(path):
     """
@@ -98,7 +98,7 @@ class ServoAct:
         self.targetPos = get_setting(path, 'Settings', 'targetPos')
         self.holdTime = 0.0
        
-        servo = 22 #pin
+        servo = int(get_setting(path, 'Settings', 'servopin'))
 
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(servo, GPIO.OUT)
@@ -111,7 +111,7 @@ class ServoAct:
         #self.close()
     
     def start(self):
-        servo = 22
+        servo = int(get_setting(path, 'Settings', 'servopin'))
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(servo, GPIO.OUT)
         self.p = GPIO.PWM(servo, 50) #50 freq        
@@ -195,6 +195,12 @@ class QRCheck:#проверка правильности
         if(str(data)=="0"):
             result = -3 #admin
             return result
+
+        if (str(data)[:4] == "1518"):
+            time = int(str(data)[4:])
+            result = -time #settings
+            return result
+
         if (str(data) == "666"):
             result = -4  #destroy
             return result

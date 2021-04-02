@@ -1,4 +1,4 @@
-#pavel idi nax i zaebalsi
+#pavel molodec
 
 import gi
 import os

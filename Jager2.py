@@ -96,7 +96,7 @@ class LED:
     def __init__(self):
         self.pin = 37
         GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(pin, GPIO.OUT)
+        GPIO.setup(self.pin, GPIO.OUT)
 
     def on(self):
         GPIO.output(self.pin, GPIO.HIGH)

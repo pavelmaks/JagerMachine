@@ -28,6 +28,8 @@ class InstructionBox(Gtk.Box):
         self.servo = None
         
         self.parent = parent
+
+        self.led = j.LED()
         
         self.busy = False
         
@@ -66,6 +68,7 @@ class InstructionBox(Gtk.Box):
         print('Instruction open')
         #self.servo.start()
         time.sleep(0.1)
+        self.led.on()
         self.setStatusText(0)
         self.busy = False
         self.show_all()
@@ -96,6 +99,7 @@ class InstructionBox(Gtk.Box):
 
     def toIdle(self):
         self.parent.openBox(self, 0)
+        self.led.off()
         print("toIdle")
 
 

@@ -92,6 +92,21 @@ def update_setting_full(path, section, data):
     with open(path, "w") as config_file:
         config.write(config_file)
 
+class LED:
+    def __init__(self):
+        self.pin = 37
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(pin, GPIO.OUT)
+
+    def on(self):
+        GPIO.output(self.pin, GPIO.HIGH)
+
+    def off(self):
+        GPIO.output(self.pin, GPIO.LOW)
+
+    def close(self):
+        GPIO.cleanup()
+
 class ServoAct:
     def __init__(self):
         self.startPos = get_setting(path, 'Settings', 'startPos')#2.5 as 0 degree

@@ -95,7 +95,7 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
         ret, frame = self.cap.read()
         #frame = self.camera.getFrame()
         #frame = frame[0:216, 0:360]
-        frame = cv2.resize(frame, (800, 480))
+        frame = cv2.resize(frame, (480, 800))
         self.frame = frame.copy()
 
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)

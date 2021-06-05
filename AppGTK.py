@@ -406,23 +406,23 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         if num == 0: #0 = idle, 1 = invalid, 2 = used
             self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>      ПОДНЕСИТЕ QR-КОД</span>")
         elif num == 1:
-            self.label.set_markup("<span color='red' size='x-large'>     QR-code не подходит</span>")
+            self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>     QR-КОД НЕ ПОДХОДИТ</span>")
             threading.Thread(target=self.warningDissapear, args=()).start()
         elif num == 2:
-            self.label.set_markup("<span color='red' size='x-large'>     QR-code уже был использован</span>")
+            self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='medium' letter-spacing ='2300'>QR-КОД УЖЕ БЫЛ ИСПОЛЬЗОВАН</span>")
             threading.Thread(target=self.warningDissapear, args=()).start()
         elif num == 3:
-            self.label.set_markup("<span color='green' size='x-large'>     QR-code принят</span>")
+            self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>       QR-КОД ПРИНЯТ</span>")
         elif num == 4:
-            self.label.set_markup("<span color='green' size='x-large'>     Admin privet</span>")
+            self.label.set_markup("<span color='#ffffff' size='x-large'>     Admin privet</span>")
         elif num == 5:
-            self.label.set_markup("<span color='green' size='x-large'>     Destroy</span>")
+            self.label.set_markup("<span color='#ffffff' size='x-large'>     Destroy</span>")
             time.sleep(4)
         elif num == 6:
-            self.label.set_markup("<span color='green' size='x-large'>     Настройки изменены</span>")
+            self.label.set_markup("<span color='#ffffff' size='x-large'>     Настройки изменены</span>")
             time.sleep(3)
         elif num > 6:
-            self.label.set_markup("<span color='green' size='x-large'>     Проливка "+str(num)+" секунд</span>")
+            self.label.set_markup("<span color='#ffffff' size='x-large'>     Проливка "+str(num)+" секунд</span>")
             time.sleep(3)
 
 

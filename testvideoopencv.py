@@ -75,7 +75,7 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
     def startPreview(self):
         while self.update:
             GLib.idle_add(self.showFrame)
-            time.sleep(0.07)
+            time.sleep(0.033)
 
 
 
@@ -86,6 +86,7 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
 
         ret, frame = self.cap.read()
         if(ret == False):
+            self.cap.release()
             self.cap = cv2.VideoCapture("./video/1.mp4")
             ret, frame = self.cap.read()
         #frame = self.camera.getFrame()

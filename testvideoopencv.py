@@ -85,8 +85,9 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
         #print('tick')
 
         ret, frame = self.cap.read()
-        if(ret):
+        if(ret == False):
             self.cap = cv2.VideoCapture("./video/1.mp4")
+            ret, frame = self.cap.read()
         #frame = self.camera.getFrame()
         #frame = frame[0:216, 0:360]
         frame = cv2.resize(frame, (480, 800))

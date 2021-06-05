@@ -12,8 +12,8 @@ import threading
 import time
 
 class IdleBox(Gtk.Box):#форма сканирования qr кода
-    def __init__(self):
-        Gtk.Box.__init__(self, parent)
+    def __init__(self, parent):
+        Gtk.Box.__init__(self)
 
 
         self.frame = None

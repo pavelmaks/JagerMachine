@@ -31,21 +31,13 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
         self.stack.add_overlay(self.image_renderer)
 
         ####LABEL
-        labelfixed = Gtk.Fixed()
-        self.stack.add_overlay(labelfixed)
 
-        labelbox = Gtk.Box()
-        labelbox.set_size_request(480, 100)
-        #labelbox.set_margin_start(150)
-        labelbox.override_background_color(0, Gdk.RGBA(0.1, 0.22, 0.06, 1))
 
-        self.label = Gtk.Label(label="Код неверен")
         #self.label.set_markup("<span color='red' size='x-large'> Invalid code</span>")
         #self.label.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0.0, 1.0, 0.0, 1.0))
         #self.label.set_valign(15)
         #self.label.set_valign()
-        labelbox.add(self.label)
-        labelfixed.put(labelbox, 0, 0)
+
 
         self.update = False
         ###LABEL END
@@ -83,7 +75,7 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
     def startPreview(self):
         while self.update:
             GLib.idle_add(self.showFrame)
-            time.sleep(0.1)
+            time.sleep(0.05)
 
 
 

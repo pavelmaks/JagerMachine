@@ -18,15 +18,12 @@ class ApplicationWindow(Gtk.Window):
 
     def __init__(self):
         Gtk.Window.__init__(self, title="Python-Vlc Media Player")
-        self.player_paused = False
         self.is_player_active = False
         self.connect("destroy", Gtk.main_quit)
 
-    def show(self):
-        self.show_all()
-
-    def setup_objects_and_events(self):
-
+        self.button = Gtk.Button(label='Нажмите, чтобы начать')
+        self.button.set_property("opacity", 0)
+        self.button.connect("clicked", self.stop_player)
         self.draw_area = Gtk.DrawingArea()
         self.draw_area.set_size_request(WIDTH, HEIGHT)
 
@@ -34,7 +31,30 @@ class ApplicationWindow(Gtk.Window):
 
         self.vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.add(self.vbox)
+        self.add(self.button)
         self.vbox.pack_start(self.draw_area, True, True, 0)
+
+    def show(self):
+        self.show_all()
+
+    '''def setup_objects_and_events(self):
+        self.button = Gtk.Button(label='Нажмите, чтобы начать')
+        self.button.set_property("opacity", 0)
+        self.button.connect("clicked", self.stop_player)
+        self.draw_area = Gtk.DrawingArea()
+        self.draw_area.set_size_request(WIDTH, HEIGHT)
+
+        self.draw_area.connect("realize", self._realized)
+
+        self.vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.add(self.vbox)
+        self.add(self.button)
+        self.vbox.pack_start(self.draw_area, True, True, 0)
+    '''
+
+    def stop_player(self, widget, data=None):
+        self.player.stop()
+        self.is_player_active = False
 
 
     def _realized(self, widget, data=None):
@@ -51,6 +71,7 @@ class ApplicationWindow(Gtk.Window):
 if __name__ == '__main__':
         window = ApplicationWindow()
         window.setup_objects_and_events()
+        window.fullscreen()
         window.show()
         Gtk.main()
         print(1)

@@ -70,7 +70,7 @@ class ApplicationWindow(Gtk.Window):
 
 if __name__ == '__main__':
         window = ApplicationWindow()
-        window.setup_objects_and_events()
+        ##window.setup_objects_and_events()
         window.fullscreen()
         window.show()
         Gtk.main()

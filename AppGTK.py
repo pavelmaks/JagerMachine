@@ -404,7 +404,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
 
     def setStatusText(self, num):
         if num == 0: #0 = idle, 1 = invalid, 2 = used
-            self.label.set_markup("<span color='black' size='x-large'>     Поднесите QR-код</span>")
+            self.label.set_markup("<span foreground='#ebe6c0' weight='ultrabold' size='xx-large'>              Поднесите QR-код</span>")
         elif num == 1:
             self.label.set_markup("<span color='red' size='x-large'>     QR-code не подходит</span>")
             threading.Thread(target=self.warningDissapear, args=()).start()

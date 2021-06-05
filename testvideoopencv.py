@@ -91,7 +91,7 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
     def showFrame(self):#демонстрация кадра на экран
 
         #print('tick')
-        
+
         ret, frame = self.cap.read()
         #frame = self.camera.getFrame()
         #frame = frame[0:216, 0:360]
@@ -111,8 +111,8 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
                                             frame.shape[0],
                                             frame.shape[2]*frame.shape[1])
 
-        pb = pb.rotate_simple(GdkPixbuf.PixbufRotation.COUNTERCLOCKWISE)
-        pb = pb.scale_simple(480, 800, GdkPixbuf.InterpType.NEAREST)#GdkPixbuf.InterpType.NEAREST
+        #pb = pb.rotate_simple(GdkPixbuf.PixbufRotation.COUNTERCLOCKWISE)
+        #pb = pb.scale_simple(480, 800, GdkPixbuf.InterpType.NEAREST)#GdkPixbuf.InterpType.NEAREST
         self.image_renderer.set_from_pixbuf(pb.copy())
 
         #try:

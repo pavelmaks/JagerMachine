@@ -353,7 +353,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         labelbox = Gtk.Box()
         labelbox.set_size_request(480, 100)
         #labelbox.set_margin_start(150)
-        labelbox.override_background_color(0, Gdk.RGBA(0.1, 0.23, 0.0, 1))
+        labelbox.override_background_color(0, Gdk.RGBA(0.1, 0.22, 0.6, 1))
 
         self.label = Gtk.Label(label="Код неверен")
         #self.label.set_markup("<span color='red' size='x-large'> Invalid code</span>")
@@ -404,7 +404,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
 
     def setStatusText(self, num):
         if num == 0: #0 = idle, 1 = invalid, 2 = used
-            self.label.set_markup("<span foreground='#ebe6c0' weight='ultrabold' size='xx-large'>              Поднесите QR-код</span>")
+            self.label.set_markup("<span font='Montserrat-Black' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='3686'>              ПОДНЕСИТЕ QR-КОД</span>")
         elif num == 1:
             self.label.set_markup("<span color='red' size='x-large'>     QR-code не подходит</span>")
             threading.Thread(target=self.warningDissapear, args=()).start()

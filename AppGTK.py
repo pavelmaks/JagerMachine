@@ -15,6 +15,7 @@ import time
 import RPi.GPIO as GPIO
 import configparser
 #import VideoPlayer as vp
+import vlc
 
 
 Gst.init(None)

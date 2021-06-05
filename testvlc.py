@@ -9,7 +9,7 @@ from gi.repository import Gtk
 
 import vlc
 
-MRL = "file:///home/pi/Documents/video.mp4"  # File to play
+MRL = "./video/1.mp4"  # File to play
 WIDTH = 300
 HEIGHT = 300
 
@@ -102,11 +102,6 @@ class ApplicationWindow(Gtk.Window):
 
 
 if __name__ == '__main__':
-    if not sys.argv[1:]:
-        print("Exiting \nMust provide the MRL.")
-        sys.exit(1)
-    if len(sys.argv[1:]) == 1:
-        MRL = sys.argv[1]
         window = ApplicationWindow()
         window.setup_objects_and_events()
         window.show()

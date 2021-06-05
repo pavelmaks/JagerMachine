@@ -352,7 +352,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         labelbox = Gtk.Box()
         labelbox.set_size_request(480, 100)
         #labelbox.set_margin_start(150)
-        labelbox.override_background_color(0, Gdk.RGBA(0.9, 0.9, 0.9, 1))
+        labelbox.override_background_color(0, Gdk.RGBA(0.1, 0.23, 0, 1))
 
         self.label = Gtk.Label(label="Код неверен")
         #self.label.set_markup("<span color='red' size='x-large'> Invalid code</span>")

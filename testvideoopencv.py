@@ -75,7 +75,7 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
     def startPreview(self):
         while self.update:
             GLib.idle_add(self.showFrame)
-            time.sleep(0.033)
+            time.sleep(0.06)
 
 
 

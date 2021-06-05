@@ -55,9 +55,8 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
         self.show_all()
 
         self.update = True
-
+        print(111)
         threading.Thread(target=self.startPreview, args=()).start()
-        threading.Thread(target=self.qrCheck, args=()).start()
 
         #self.par.openBox(self, 0)
 
@@ -144,12 +143,14 @@ class ApplicationWindow(Gtk.Window):
         self.add(self.box)
 
         self.box.add(self.idle)
-
+    def start(self):
+        self.idle.onOpen()
 
 
 if __name__ == '__main__':
         window = ApplicationWindow()
         ##window.setup_objects_and_events()
         window.fullscreen()
+        window.start()
         window.show_all()
         Gtk.main()

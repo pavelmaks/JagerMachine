@@ -4,8 +4,8 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-#gi.require_version('GdkX11', '3.0')
-#from gi.repository import GdkX11
+gi.require_version('GdkX11', '3.0')
+from gi.repository import GdkX11
 
 import vlc
 
@@ -30,7 +30,7 @@ class IdleBox(Gtk.Box):  # стартовая форма
 
         draw_area.connect("realize", self._realized)
 
-        overlay.add(draw_area)
+        self.add(draw_area)
 
         button = Gtk.Button(label='Нажмите, чтобы начать')
         button.set_property("opacity", 0)
@@ -54,11 +54,12 @@ class IdleBox(Gtk.Box):  # стартовая форма
         self.vlcInstance = vlc.Instance("--no-xlib", "--input-repeat=-1")
         self.player = self.vlcInstance.media_player_new()
         win_id = widget.get_window().get_xid()
+        print(win_id)
         self.player.set_xwindow(win_id)
         self.player.set_mrl(MRL)
         self.player.play()
-        self.playback_button.set_image(self.pause_image)
-        self.is_player_active = True
+
+
     def onOpen(self):
         print('Idle open')
         self.show_all()

@@ -106,5 +106,8 @@ if __name__ == '__main__':
         window.setup_objects_and_events()
         window.show()
         Gtk.main()
+        print(1)
         window.player.stop()
+        print(2)
         window.vlcInstance.release()
+        print(3)

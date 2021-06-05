@@ -19,7 +19,7 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
         self.frame = None
         self.scannerOn = True
         self.warning = False
-
+        self.cap = cv2.VideoCapture("./video/1.mp4")
         self.stack = Gtk.Overlay()
         self.add(self.stack)
 
@@ -91,16 +91,14 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
     def showFrame(self):#демонстрация кадра на экран
 
         #print('tick')
-
-        cap = cv2.VideoCapture("./video/1.mp4")
-        ret, frame = cap.read()
+        
+        ret, frame = self.cap.read()
         #frame = self.camera.getFrame()
         #frame = frame[0:216, 0:360]
         frame = cv2.resize(frame, (800, 480))
         self.frame = frame.copy()
 
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        frame = cv2.flip(frame,1)
 
         #overlay = cv2.imread('border.png')
         #frame = cv2.addWeighted(frame,0.8,overlay,0.1,0)

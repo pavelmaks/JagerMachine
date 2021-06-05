@@ -9,7 +9,7 @@ from gi.repository import Gtk
 
 import vlc
 
-MRL = "./video/1.mp4"  # File to play
+MRL = "file:///home/pi/Documents/video.mp4"  # File to play
 WIDTH = 300
 HEIGHT = 300
 

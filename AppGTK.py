@@ -104,19 +104,16 @@ class InstructionBox(Gtk.Box):
 
     def setStatusText(self, num):#изменение фона и надписей
         if num == 0: #0 = idle, 1 = invalid, 2 = used
-            GLib.idle_add(self.setBackground, 0)
             self.target="./video/v2.mp4"
             self.cap.release()
             self.cap = cv2.VideoCapture(self.target)
             ret, self.frame = self.cap.read()
         elif num == 1:
-            GLib.idle_add(self.setBackground, 1)
             self.target = "./video/v3.mp4"
             self.cap.release()
             self.cap = cv2.VideoCapture(self.target)
             ret, self.frame = self.cap.read()
         elif num == 2:
-            GLib.idle_add(self.setBackground, 2)
             self.target = "./video/v4.mp4"
             self.cap.release()
             self.cap = cv2.VideoCapture(self.target)

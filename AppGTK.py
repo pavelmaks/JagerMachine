@@ -548,9 +548,9 @@ class AppWindow(Gtk.Window):#главная форма
 
     def openBoxSafe(self, widget, num):
         #0 - idle, 1 - scanner, 2 - instruct
-        self.box.remove(widget)
-
-        widget.onClose()
+        if widget is not None:
+            self.box.remove(widget)
+            widget.onClose()
         target = None
 
         if num == 0:

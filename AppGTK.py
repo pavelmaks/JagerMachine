@@ -164,7 +164,8 @@ class IdleBox(Gtk.Box):#стартовая форма
 
         self.stack = Gtk.Overlay()
         self.add(self.stack)
-
+        background = Gtk.Image.new_from_file('disp2.png')
+        self.stack.add(background)
 
         self.file="./video/v1.mp4"
         self.cap = cv2.VideoCapture(self.file)

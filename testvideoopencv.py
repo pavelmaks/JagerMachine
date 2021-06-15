@@ -24,8 +24,8 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
         self.stack = Gtk.Overlay()
         self.add(self.stack)
 
-        #background = Gtk.Image.new_from_file('disp2.png')
-        #self.stack.add(background)
+        background = Gtk.Image.new_from_file('disp2.png')
+        self.stack.add(background)
 
         self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('disp1.png', 480, 800)
         self.image_renderer = Gtk.Image.new_from_pixbuf(self.image)

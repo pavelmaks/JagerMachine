@@ -105,19 +105,13 @@ class InstructionBox(Gtk.Box):
     def setStatusText(self, num):#изменение фона и надписей
         if num == 0: #0 = idle, 1 = invalid, 2 = used
             self.target="./video/v2.mp4"
-            self.cap.release()
-            self.cap = cv2.VideoCapture(self.target)
-            self.ret, self.frame = self.cap.read()
+            self.ret = False
         elif num == 1:
             self.target = "./video/v3.mp4"
-            self.cap.release()
-            self.cap = cv2.VideoCapture(self.target)
-            self.ret, self.frame = self.cap.read()
+            self.ret = False
         elif num == 2:
             self.target = "./video/v4.mp4"
-            #self.cap.release()
-            #self.cap = cv2.VideoCapture(self.target)
-            self.ret = False#, self.frame = self.cap.read()
+            self.ret = False
 
     def setBackground(self, num):#изменение фона
         if num == 0:
@@ -244,10 +238,6 @@ class IdleBox(Gtk.Box):#стартовая форма
 
 
     def showFrame(self):#демонстрация кадра на экран
-
-        #print('tick')
-
-        self.ret, self.frame = self.cap.read()
         if(self.ret == False):
             self.cap.release()
             self.cap = cv2.VideoCapture(self.file)
@@ -262,6 +252,7 @@ class IdleBox(Gtk.Box):#стартовая форма
                                             frame.shape[2]*frame.shape[1])
 
         self.image_renderer.set_from_pixbuf(pb.copy())
+        self.ret, self.frame = self.cap.read()
 
     def onClose(self):
         self.update = False

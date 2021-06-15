@@ -127,6 +127,106 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
     #     print('close scanner')
     #     self.update = False
 
+class OneMorePlayer(Gtk.Box):
+
+    def __init__(self):
+        Gtk.Box.__init__(self)
+
+        self.secs = int(round(time.time() * 1000))
+
+        self.cap = None
+
+        self.drawing_area = Gtk.DrawingArea()
+        self.drawing_area.connect("draw", self.on_drawing_area_draw)
+        self.drawing_area.set_size_request(480, 800)
+        self.add(self.drawing_area)
+
+        #self.image = Gtk.Image()
+        #self.image = Gtk.Image.new_from_file('disp2.png')
+        #self.image.set_size_request(480, 800)
+        #self.add(self.image)
+
+        self.mymutex = threading.Lock()
+        self.dimg = GdkPixbuf.Pixbuf.new_from_file('disp1.png')
+
+        thread = threading.Thread(target = self.VideoLoop)
+        #thread.daemon = True
+        thread.start()
+        self.show_all()
+
+    def on_drawing_area_draw(self,widget,cr):
+        #print('')
+        #self.mymutex.acquire()
+        #print('draw')
+        Gdk.cairo_set_source_pixbuf(cr, self.dimg.copy(), 0, 0)
+        cr.paint()
+        now = int(round(time.time() * 1000))
+        print(str(now-self.secs))
+        self.secs = now
+        #self.mymutex.release()
+
+    def VideoLoop(self):
+
+        filename = 'video.mp4'
+
+        self.cap = cv2.VideoCapture(filename)
+        print(self.cap.isOpened())
+
+        #GLib.timeout_add(3, self.drawing_area.queue_draw)
+
+
+        while True:
+            #GLib.idle_add(self.showFrame)
+            self.showFrame()
+            time.sleep(0.03)
+        #img = np.random.randint(255, size=(300, 600, 3))
+        #isWritten = cv2.imwrite('image-2.png', img)
+
+    def show(self):
+        self.image.set_from_pixbuf(self.dimg.copy())
+
+    def showFrame(self):
+        #while True:
+        #print('showFrame')
+        ret, img = self.cap.read()
+
+        #print(save)
+        if img is not None:
+            #save = cv2.imwrite('/home/pi/image-3.png', img)
+            #print(save)
+            #self.mymutex.acquire()
+            #boxAllocation = self.drawing_area.get_allocation()
+            #print(boxAllocation.width)
+            #img = cv2.resize(img, (boxAllocation.width,\
+            #                       boxAllocation.height))
+
+            #img = cv2.resize(img, (480, 800))
+
+            img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) # opencv by default load BGR colorspace. Gtk supports RGB hance the conversion
+            self.dimg = GdkPixbuf.Pixbuf.new_from_data(img.tostring(),
+                                                  GdkPixbuf.Colorspace.RGB,False,8,
+                                                  img.shape[1],
+                                                  img.shape[0],                                                      img.shape[2]*img.shape[1],None,None)
+
+            #time.sleep(0.03)
+
+            Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.drawing_area.queue_draw)
+            #GLib.idle_add(self.drawing_area.queue_draw)
+
+
+            #self.drawing_area.queue_draw()
+            #self.drawing_area.draw()
+            #self.mymutex.release()
+
+            #time.sleep(0.1)
+            if ((cv2.waitKey(30) & 0xFF) == ord('q')):
+                print('off')
+        else:
+            #self.mymutex.release()
+            print('end of file')
+
+
+
 
 class ApplicationWindow(Gtk.Window):
 

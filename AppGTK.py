@@ -168,7 +168,7 @@ class IdleBox(Gtk.Box):#стартовая форма
         self.stack.add(background)
 
         self.file="./video/v1.mp4"
-        self.cap = cv2.VideoCapture(self.file)
+        self.cap = cv2.VideoCapture("./video/v1.mp4")
         ret, self.frame = self.cap.read()
         self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('disp1.png', 480, 800)
         self.image_renderer = Gtk.Image.new_from_pixbuf(self.image)
@@ -225,7 +225,7 @@ class IdleBox(Gtk.Box):#стартовая форма
         ret, self.frame = self.cap.read()
         if(ret == False):
             self.cap.release()
-            self.cap = cv2.VideoCapture(self.file)
+            self.cap = cv2.VideoCapture("./video/v1.mp4")
             ret, self.frame = self.cap.read()
         frame = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
         pb = GdkPixbuf.Pixbuf.new_from_data(frame.tostring(),

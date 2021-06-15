@@ -170,7 +170,7 @@ class InstructionBox(Gtk.Box):
         servo.hold()
         time.sleep(2)
 
-        self.setStatusText(self.setStatusText(2))
+        self.setStatusText(2)
 
         time.sleep(7)
 

@@ -25,7 +25,7 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
 
         self.cap = cv2.VideoCapture("./video/1.mp4")
         ret, self.frame = self.cap.read()
-        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('disp1.png', 480, 800)
+        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('disp1.png', 481, 801)
         self.image_renderer = Gtk.Image.new_from_pixbuf(self.image)
         self.stack.add_overlay(self.image_renderer)
 

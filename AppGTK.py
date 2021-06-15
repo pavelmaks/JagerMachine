@@ -162,21 +162,16 @@ class IdleBox(Gtk.Box):#стартовая форма
         self.parent = parent
         #self.videoPlayer = VideoPlayer()
 
-        overlay = Gtk.Overlay()
-        self.add(overlay)
+        self.stack = Gtk.Overlay()
+        self.add(self.stack)
 
-        background = Gtk.Image.new_from_file('start.png')
-        #background = Gtk.Image()
-        #buf = GdkPixbuf.PixbufAnimation.new_from_file("disp1.png")
-        #background.set_from_animation(buf)v
-        overlay.add(background)
 
         self.file="./video/1.mp4"
         self.cap = cv2.VideoCapture(self.file)
         ret, self.frame = self.cap.read()
         self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('disp1.png', 480, 800)
         self.image_renderer = Gtk.Image.new_from_pixbuf(self.image)
-        overlay.add_overlay(self.image_renderer)
+        self.stack.add_overlay(self.image_renderer)
         self.update = False
 
         #player = OneMorePlayer()
@@ -195,7 +190,7 @@ class IdleBox(Gtk.Box):#стартовая форма
         button.set_property("opacity", 0)
         button.connect("clicked", self.toScanner) # привязка тригера на переход к qr коду
 
-        overlay.add_overlay(button)
+        self.stack.add_overlay(button)
 
         """
         exitbutton = Gtk.Button(label='X')

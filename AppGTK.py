@@ -168,11 +168,16 @@ class IdleBox(Gtk.Box):#стартовая форма
         background = Gtk.Image.new_from_file('start.png')
         #background = Gtk.Image()
         #buf = GdkPixbuf.PixbufAnimation.new_from_file("disp1.png")
-        #background.set_from_animation(buf)
-
-
-
+        #background.set_from_animation(buf)v
         overlay.add(background)
+
+        self.file="./video/1.mp4"
+        self.cap = cv2.VideoCapture(self.file)
+        ret, self.frame = self.cap.read()
+        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('disp1.png', 480, 800)
+        self.image_renderer = Gtk.Image.new_from_pixbuf(self.image)
+        overlay.add_overlay(self.image_renderer)
+        self.update = False
 
         #player = OneMorePlayer()
         #overlay.add_overlay(player)
@@ -207,11 +212,42 @@ class IdleBox(Gtk.Box):#стартовая форма
     def onOpen(self):
         print('Idle open')
         self.show_all()
+        self.update = True
+        print(111)
+        threading.Thread(target=self.startPreview, args=()).start()
+
+    def startPreview(self):
+        while self.update:
+            GLib.idle_add(self.showFrame)
+            time.sleep(0.07)
+
+
+    def showFrame(self):#демонстрация кадра на экран
+
+        #print('tick')
+
+        ret, self.frame = self.cap.read()
+        if(ret == False):
+            self.cap.release()
+            self.cap = cv2.VideoCapture(self.file)
+            ret, self.frame = self.cap.read()
+        frame = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
+        pb = GdkPixbuf.Pixbuf.new_from_data(frame.tostring(),
+                                            GdkPixbuf.Colorspace.RGB,
+                                            False,
+                                            8,
+                                            frame.shape[1],
+                                            frame.shape[0],
+                                            frame.shape[2]*frame.shape[1])
+
+        self.image_renderer.set_from_pixbuf(pb.copy())
 
     def onClose(self):
+        self.update = False
         print('Idle close')
 
     def toScanner(self, widget): # функция перехода к QR коду
+        self.update = False
         self.parent.openBox(self, 1)
 
     # def close(self):

@@ -80,7 +80,6 @@ class InstructionBox(Gtk.Box):
 
         # print('tick')
 
-        self.ret, self.frame = self.cap.read()
         if (self.ret == False):
             self.cap.release()
             self.cap = cv2.VideoCapture(self.target)
@@ -94,6 +93,7 @@ class InstructionBox(Gtk.Box):
                                             frame.shape[0],
                                             frame.shape[2] * frame.shape[1])
         self.image_renderer.set_from_pixbuf(pb.copy())
+        self.ret, self.frame = self.cap.read()
 
 
     def onClose(self):
@@ -115,9 +115,9 @@ class InstructionBox(Gtk.Box):
             self.ret, self.frame = self.cap.read()
         elif num == 2:
             self.target = "./video/v4.mp4"
-            self.cap.release()
-            self.cap = cv2.VideoCapture(self.target)
-            self.ret, self.frame = self.cap.read()
+            #self.cap.release()
+            #self.cap = cv2.VideoCapture(self.target)
+            self.ret = False#, self.frame = self.cap.read()
 
     def setBackground(self, num):#изменение фона
         if num == 0:

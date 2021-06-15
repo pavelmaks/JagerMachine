@@ -38,9 +38,9 @@ class InstructionBox(Gtk.Box):
         self.ret, self.frame = self.cap.read()
         self.stack = Gtk.Overlay()
         self.add(self.stack)
-        background = Gtk.Image.new_from_file('./video/photo2.png')
+        background = Gtk.Image.new_from_file('./video/photo1.png')
         self.stack.add(background)
-        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('./video/photo2.png', 480, 800)
+        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('./video/photo1.png', 480, 800)
         self.image_renderer = Gtk.Image.new_from_pixbuf(self.image)
         self.stack.add_overlay(self.image_renderer)
 
@@ -485,7 +485,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
 
         #print('tick')
         frame = self.camera.getFrame()
-        frame = frame[0:218, 0:360]
+        frame = frame[0:216, 0:360]
         #frame = cv2.resize(frame, (800, 480))
         self.frame = frame.copy()
 

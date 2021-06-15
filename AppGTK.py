@@ -38,9 +38,9 @@ class InstructionBox(Gtk.Box):
         self.ret, self.frame = self.cap.read()
         self.stack = Gtk.Overlay()
         self.add(self.stack)
-        background = Gtk.Image.new_from_file('disp2.png')
+        background = Gtk.Image.new_from_file('./video/photo1.png')
         self.stack.add(background)
-        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('disp1.png', 480, 800)
+        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('./video/photo1.png', 480, 800)
         self.image_renderer = Gtk.Image.new_from_pixbuf(self.image)
         self.stack.add_overlay(self.image_renderer)
 
@@ -166,7 +166,7 @@ class InstructionBox(Gtk.Box):
 
         self.setStatusText(2)
 
-        time.sleep(6)
+        time.sleep(10)
 
         self.toIdle()
 
@@ -185,7 +185,7 @@ class IdleBox(Gtk.Box):#стартовая форма
         self.ret, self.frame = self.cap.read()
         self.stack = Gtk.Overlay()
         self.add(self.stack)
-        background = Gtk.Image.new_from_file('disp2.png')
+        background = Gtk.Image.new_from_file('./video/photo1.png')
         self.stack.add(background)
 
 
@@ -290,10 +290,10 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         self.stack = Gtk.Overlay()
         self.add(self.stack)
 
-        background = Gtk.Image.new_from_file('disp2.png')
+        background = Gtk.Image.new_from_file('./video/photo1.png')
         self.stack.add(background)
 
-        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('disp1.png', 480, 800)
+        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('./video/photo1.png', 480, 800)
         self.image_renderer = Gtk.Image.new_from_pixbuf(self.image)
         self.stack.add_overlay(self.image_renderer)
 

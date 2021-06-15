@@ -20,6 +20,7 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
         self.scannerOn = True
         self.warning = False
         self.cap = cv2.VideoCapture("./video/1.mp4")
+        ret, self.frame = self.cap.read()
         self.stack = Gtk.Overlay()
         self.add(self.stack)
 
@@ -29,6 +30,11 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
         self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('disp1.png', 480, 800)
         self.image_renderer = Gtk.Image.new_from_pixbuf(self.image)
         self.stack.add_overlay(self.image_renderer)
+        button = Gtk.Button(label='Нажмите, чтобы начать')
+        button.set_property("opacity", 0)
+        button.connect("clicked", self.onClose)  # привязка тригера на переход к qr коду
+
+        self.stack.add_overlay(button)
 
         ####LABEL
 
@@ -84,17 +90,14 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
 
         #print('tick')
 
-        ret, frame = self.cap.read()
+        ret, self.frame = self.cap.read()
         if(ret == False):
             self.cap.release()
             self.cap = cv2.VideoCapture("./video/1.mp4")
-            ret, frame = self.cap.read()
+            ret, self.frame = self.cap.read()
         #frame = self.camera.getFrame()
         #frame = frame[0:216, 0:360]
-        frame = cv2.resize(frame, (480, 800))
-        self.frame = frame.copy()
-
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frame = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
 
         #overlay = cv2.imread('border.png')
         #frame = cv2.addWeighted(frame,0.8,overlay,0.1,0)

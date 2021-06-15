@@ -584,7 +584,7 @@ class main:
         self.win = AppWindow()
         self.win.connect("destroy", self.close)
         self.win.fullscreen()
-        self.win.openBox(self, 0)
+        self.win.openBox(None, 0)
         self.win.show_all()
         Gtk.main()
 

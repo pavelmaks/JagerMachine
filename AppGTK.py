@@ -35,7 +35,7 @@ class InstructionBox(Gtk.Box):
         self.busy = False
         self.target="./video/v2.mp4"
         self.cap = cv2.VideoCapture(self.target)
-        ret, self.frame = self.cap.read()
+        self.ret, self.frame = self.cap.read()
         self.stack = Gtk.Overlay()
         self.add(self.stack)
         background = Gtk.Image.new_from_file('disp2.png')
@@ -80,11 +80,11 @@ class InstructionBox(Gtk.Box):
 
         # print('tick')
 
-        ret, self.frame = self.cap.read()
-        if (ret == False):
+        self.ret, self.frame = self.cap.read()
+        if (self.ret == False):
             self.cap.release()
             self.cap = cv2.VideoCapture(self.target)
-            ret, self.frame = self.cap.read()
+            self.ret, self.frame = self.cap.read()
         frame = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
         pb = GdkPixbuf.Pixbuf.new_from_data(frame.tostring(),
                                             GdkPixbuf.Colorspace.RGB,
@@ -107,17 +107,17 @@ class InstructionBox(Gtk.Box):
             self.target="./video/v2.mp4"
             self.cap.release()
             self.cap = cv2.VideoCapture(self.target)
-            ret, self.frame = self.cap.read()
+            self.ret, self.frame = self.cap.read()
         elif num == 1:
             self.target = "./video/v3.mp4"
             self.cap.release()
             self.cap = cv2.VideoCapture(self.target)
-            ret, self.frame = self.cap.read()
+            self.ret, self.frame = self.cap.read()
         elif num == 2:
             self.target = "./video/v4.mp4"
             self.cap.release()
             self.cap = cv2.VideoCapture(self.target)
-            ret, self.frame = self.cap.read()
+            self.ret, self.frame = self.cap.read()
 
     def setBackground(self, num):#изменение фона
         if num == 0:
@@ -139,7 +139,7 @@ class InstructionBox(Gtk.Box):
     def servoGo(self, widget):#запуск процесса розлива
         print(18)
         if self.busy:
-            return
+            self.return
         print(19)
         self.setStatusText(1)
         print(20)
@@ -188,7 +188,7 @@ class IdleBox(Gtk.Box):#стартовая форма
         self.parent = parent
         self.file = "./video/v1.mp4"
         self.cap = cv2.VideoCapture(self.file)
-        ret, self.frame = self.cap.read()
+        self.ret, self.frame = self.cap.read()
         self.stack = Gtk.Overlay()
         self.add(self.stack)
         background = Gtk.Image.new_from_file('disp2.png')
@@ -247,11 +247,11 @@ class IdleBox(Gtk.Box):#стартовая форма
 
         #print('tick')
 
-        ret, self.frame = self.cap.read()
-        if(ret == False):
+        self.ret, self.frame = self.cap.read()
+        if(self.ret == False):
             self.cap.release()
             self.cap = cv2.VideoCapture(self.file)
-            ret, self.frame = self.cap.read()
+            self.ret, self.frame = self.cap.read()
         frame = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
         pb = GdkPixbuf.Pixbuf.new_from_data(frame.tostring(),
                                             GdkPixbuf.Colorspace.RGB,

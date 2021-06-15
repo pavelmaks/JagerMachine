@@ -139,7 +139,7 @@ class InstructionBox(Gtk.Box):
     def servoGo(self, widget):#запуск процесса розлива
         print(18)
         if self.busy:
-            self.return
+            return
         print(19)
         self.setStatusText(1)
         print(20)

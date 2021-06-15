@@ -156,6 +156,7 @@ class InstructionBox(Gtk.Box):
         print('servoGo')
         servo.setActPosition()
         print(25)
+
         time.sleep(0.4)
         print(26)
         print('servoOnPlace')

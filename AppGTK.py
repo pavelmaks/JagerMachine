@@ -166,7 +166,7 @@ class IdleBox(Gtk.Box):#стартовая форма
         self.add(self.stack)
 
 
-        self.file="./video/1.mp4"
+        self.file="./video/v1.mp4"
         self.cap = cv2.VideoCapture(self.file)
         ret, self.frame = self.cap.read()
         self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('disp1.png', 480, 800)

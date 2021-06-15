@@ -168,11 +168,11 @@ class InstructionBox(Gtk.Box):
 
         print('servoEnd')
         servo.hold()
-        time.sleep(2)
+        time.sleep(1)
 
         self.setStatusText(2)
 
-        time.sleep(7)
+        time.sleep(6)
 
         self.toIdle()
 

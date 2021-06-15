@@ -33,37 +33,24 @@ class InstructionBox(Gtk.Box):
         self.led = j.LED()
 
         self.busy = False
+        self.target="./video/v2.mp4"
+        self.cap = cv2.VideoCapture(self.target)
+        ret, self.frame = self.cap.read()
+        self.stack = Gtk.Overlay()
+        self.add(self.stack)
+        background = Gtk.Image.new_from_file('disp2.png')
+        self.stack.add(background)
+        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('disp1.png', 480, 800)
+        self.image_renderer = Gtk.Image.new_from_pixbuf(self.image)
+        self.stack.add_overlay(self.image_renderer)
 
-        overlay = Gtk.Overlay()
-        self.add(overlay)
 
-        self.background = Gtk.Image.new_from_file('disp1.png')
-        overlay.add(self.background)
-
-        ####LABEL
-        labelfixed = Gtk.Fixed()
-        #overlay.add_overlay(labelfixed) text!!!
-
-        labelbox = Gtk.Box()
-        labelbox.set_size_request(480, 100)
-        #labelbox.set_margin_start(150)
-        labelbox.override_background_color(0, Gdk.RGBA(0.9, 0.9, 0.9, 1))
-
-        self.label = Gtk.Label(label="Код неверен")
         self.setStatusText(0)
-        #self.label.set_markup("<span color='red' size='x-large'> Invalid code</span>")
-        #self.label.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0.0, 1.0, 0.0, 1.0))
-        #self.label.set_valign(15)
-        #self.label.set_valign()
-        labelbox.add(self.label)
-        labelfixed.put(labelbox, 0, 0)
-        ###LABEL END
-
         button = Gtk.Button(label='Установите емкость и нажмите')
         button.set_property("opacity", 0)
         button.connect("clicked", self.servoGo)
 
-        overlay.add_overlay(button)
+        self.stack.add_overlay(button)
 
     def onOpen(self):
         print('Instruction open')
@@ -78,22 +65,65 @@ class InstructionBox(Gtk.Box):
         self.busy = False
         print(16)
         self.show_all()
+        self.update = True
+        print(111)
+        threading.Thread(target=self.startPreview, args=()).start()
+
         print(17)
+
+    def startPreview(self):
+        while self.update:
+            GLib.idle_add(self.showFrame)
+            time.sleep(0.07)
+
+    def showFrame(self):  # демонстрация кадра на экран
+
+        # print('tick')
+
+        ret, self.frame = self.cap.read()
+        if (ret == False):
+            self.cap.release()
+            self.cap = cv2.VideoCapture(self.target)
+            ret, self.frame = self.cap.read()
+        frame = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
+        pb = GdkPixbuf.Pixbuf.new_from_data(frame.tostring(),
+                                            GdkPixbuf.Colorspace.RGB,
+                                            False,
+                                            8,
+                                            frame.shape[1],
+                                            frame.shape[0],
+                                            frame.shape[2] * frame.shape[1])
+        self.image_renderer.set_from_pixbuf(pb.copy())
+
 
     def onClose(self):
         #self.servo.close()
+        self.update = False
+        self.cap.release()
         print('Instruction close')
 
     def setStatusText(self, num):#изменение фона и надписей
         if num == 0: #0 = idle, 1 = invalid, 2 = used
             self.label.set_markup("<span color='green' size='x-large'>QR-code активирован\nУстановите емкость\nи нажмите на экран</span>")
             GLib.idle_add(self.setBackground, 0)
+            self.target="./video/v2.mp4"
+            self.cap.release()
+            self.cap = cv2.VideoCapture(self.target)
+            ret, self.frame = self.cap.read()
         elif num == 1:
             self.label.set_markup("<span color='black' size='x-large'>Процесс разлива</span>")
             GLib.idle_add(self.setBackground, 1)
+            self.target = "./video/v3.mp4"
+            self.cap.release()
+            self.cap = cv2.VideoCapture(self.target)
+            ret, self.frame = self.cap.read()
         elif num == 2:
             self.label.set_markup("<span color='green' size='x-large'>Процесс разлива окончен</span>")
             GLib.idle_add(self.setBackground, 2)
+            self.target = "./video/v4.mp4"
+            self.cap.release()
+            self.cap = cv2.VideoCapture(self.target)
+            ret, self.frame = self.cap.read()
 
     def setBackground(self, num):#изменение фона
         if num == 0:
@@ -107,6 +137,8 @@ class InstructionBox(Gtk.Box):
     def toIdle(self):
         self.parent.openBox(self, 0)
         self.led.off()
+        self.update = False
+        self.cap.release()
         print("toIdle")
 
 
@@ -160,15 +192,14 @@ class IdleBox(Gtk.Box):#стартовая форма
         Gtk.Box.__init__(self)
 
         self.parent = parent
-        #self.videoPlayer = VideoPlayer()
-        self.cap = cv2.VideoCapture("./video/v1.mp4")
+        self.file = "./video/v1.mp4"
+        self.cap = cv2.VideoCapture(self.file)
         ret, self.frame = self.cap.read()
         self.stack = Gtk.Overlay()
         self.add(self.stack)
         background = Gtk.Image.new_from_file('disp2.png')
         self.stack.add(background)
 
-        self.file="./video/v1.mp4"
 
         self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('disp1.png', 480, 800)
         self.image_renderer = Gtk.Image.new_from_pixbuf(self.image)
@@ -225,7 +256,7 @@ class IdleBox(Gtk.Box):#стартовая форма
         ret, self.frame = self.cap.read()
         if(ret == False):
             self.cap.release()
-            self.cap = cv2.VideoCapture("./video/v1.mp4")
+            self.cap = cv2.VideoCapture(self.file)
             ret, self.frame = self.cap.read()
         frame = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
         pb = GdkPixbuf.Pixbuf.new_from_data(frame.tostring(),
@@ -240,10 +271,12 @@ class IdleBox(Gtk.Box):#стартовая форма
 
     def onClose(self):
         self.update = False
+        self.cap.release()
         print('Idle close')
 
     def toScanner(self, widget): # функция перехода к QR коду
         self.update = False
+        self.cap.release()
         self.parent.openBox(self, 1)
 
     # def close(self):

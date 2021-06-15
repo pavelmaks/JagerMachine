@@ -363,7 +363,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
             self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='large' letter-spacing ='2300'>   QR-КОД УЖЕ БЫЛ ИСПОЛЬЗОВАН</span>")
             threading.Thread(target=self.warningDissapear, args=()).start()
         elif num == 3:
-            self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>        QR-КОД ПРИНЯТ</span>")
+            self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>         QR-КОД ПРИНЯТ</span>")
         elif num == 4:
             self.label.set_markup("<span color='#ffffff' size='x-large'>     Admin privet</span>")
         elif num == 5:

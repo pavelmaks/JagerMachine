@@ -58,7 +58,7 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
 
         #self.par.openBox(self, 0)
 
-    def onClose(self):
+    def onClose(self,widget):
         print('Scanner close')
         print(1)
         print(2)

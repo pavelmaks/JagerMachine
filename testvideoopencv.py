@@ -19,17 +19,17 @@ class IdleBox(Gtk.Box):#форма сканирования qr кода
         self.frame = None
         self.scannerOn = True
         self.warning = False
-
+        self.cap = cv2.VideoCapture("./video/v1.mp4")
+        ret, self.frame = self.cap.read()
         self.stack = Gtk.Overlay()
         self.add(self.stack)
 
-        self.cap = cv2.VideoCapture("./video/v1.mp4")
-        ret, self.frame = self.cap.read()
-        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('disp1.png', 481, 801)
+        background = Gtk.Image.new_from_file('disp2.png')
+        self.stack.add(background)
+
+        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size('disp1.png', 480, 800)
         self.image_renderer = Gtk.Image.new_from_pixbuf(self.image)
         self.stack.add_overlay(self.image_renderer)
-
-
         button = Gtk.Button(label='Нажмите, чтобы начать')
         button.set_property("opacity", 0)
         button.connect("clicked", self.onClose)  # привязка тригера на переход к qr коду

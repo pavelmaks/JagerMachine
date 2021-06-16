@@ -343,14 +343,14 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         print(4)
 
     def toIdle(self, widget):
-        self.hide_all()
+        self.hide()
         self.par.openBox(self, 0)
         print("toIdle")
 
 
     def toInstruction(self, widget):
         print(10)
-        self.hide_all()
+        self.hide()
         self.par.openBox(self, 2)
         print(11)
         print('toInstruction')

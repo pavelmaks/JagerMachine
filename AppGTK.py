@@ -65,6 +65,7 @@ class InstructionBox(Gtk.Box):
         self.busy = False
         print(16)
         self.show_all()
+        self.grab_focus()
         self.update = True
         print(111)
         threading.Thread(target=self.startPreview, args=()).start()

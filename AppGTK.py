@@ -533,7 +533,7 @@ class AppWindow(Gtk.Window):#главная форма
 
         Gtk.Window.__init__(self, title="Hello World")
         self.set_size_request(480, 800)
-        self.modify_bg(Gtk.StateFlags.NORMAL,Gdk.color_parse("red"))
+        self.modify_bg(Gtk.StateFlags.NORMAL,Gdk.color_parse("#1A308F"))
 
         self.idle = IdleBox(self)
         self.scanner = ScannerBox(self)

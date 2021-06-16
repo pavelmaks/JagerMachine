@@ -345,6 +345,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
 
     def toIdle(self, widget):
         self.hide()
+        self.update = False
         self.par.openBox(self, 0)
         print("toIdle")
 
@@ -352,6 +353,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
     def toInstruction(self, widget):
         print(10)
         self.hide()
+        self.update = False
         self.par.openBox(self, 2)
         print(11)
         print('toInstruction')

@@ -355,7 +355,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
 
     def setStatusText(self, num):
         if num == 0: #0 = idle, 1 = invalid, 2 = used
-            self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>      ПОДНЕСИТЕ QR-КОД</span>")
+            self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>     ПОДНЕСИТЕ QR-КОД</span>")
         elif num == 1:
             self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>    QR-КОД НЕ ПОДХОДИТ</span>")
             threading.Thread(target=self.warningDissapear, args=()).start()
@@ -484,12 +484,11 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
     def showFrame(self):#демонстрация кадра на экран
 
         #print('tick')
-        oldframe=self.frame.copy()
         try:
             frame = self.camera.getFrame()
         except Exception:
-            frame=oldframe.copy()
-        frame = self.frame[0:220, 0:360]
+            frame = self.frame
+        frame = frame[0:220, 0:360]
         #frame = cv2.resize(frame, (800, 480))
         self.frame = frame.copy()
 

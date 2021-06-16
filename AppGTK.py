@@ -543,7 +543,7 @@ class AppWindow(Gtk.Window):#главная форма
 
         self.add(self.box)
 
-        self.box.add(self.idle)s
+        self.box.add(self.idle)
 
 
         """

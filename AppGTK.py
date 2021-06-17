@@ -394,6 +394,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
     def startPreview(self):
         while self.update:
             GLib.idle_add(self.showFrame)
+            self.par.present()
             time.sleep(0.1)
 
     def qrCheck(self):#функция проверки qr кода и выдачи результата
@@ -420,12 +421,14 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         print("Invalid code")
                         if not self.warning:
                             self.setStatusText(1)
+                            start_time = time.time()
                             #4 sec wait
 
                     elif qrresult == -2:
                         print("Code already used")
                         if not self.warning:
                             self.setStatusText(2)
+                            start_time = time.time()
                             #4 sec wait
                     elif qrresult == -3:
                         print("Admin privet")

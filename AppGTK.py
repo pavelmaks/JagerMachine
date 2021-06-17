@@ -358,6 +358,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
     def setStatusText(self, num):
         if num == 0: #0 = idle, 1 = invalid, 2 = used
             self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>     ПОДНЕСИТЕ QR-КОД</span>")
+            threading.Thread(target=self.warningDissapear, args=()).start()
         elif num == 1:
             self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>    QR-КОД НЕ ПОДХОДИТ</span>")
             threading.Thread(target=self.warningDissapear, args=()).start()
@@ -366,6 +367,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
             threading.Thread(target=self.warningDissapear, args=()).start()
         elif num == 3:
             self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>        QR-КОД ПРИНЯТ</span>")
+            threading.Thread(target=self.warningDissapear, args=()).start()
         elif num == 4:
             self.label.set_markup("<span color='#ffffff' size='x-large'>     Admin privet</span>")
         elif num == 5:
@@ -480,7 +482,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         self.toInstruction(None)
                         #Servo go
 
-            time.sleep(1)
+            time.sleep(0.5)
 
         self.qrcheck.close()
 

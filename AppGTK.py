@@ -95,7 +95,8 @@ class InstructionBox(Gtk.Box):
                                             frame.shape[0],
                                             frame.shape[2] * frame.shape[1])
         self.image_renderer.set_from_pixbuf(pb.copy())
-        self.ret, self.frame = self.cap.read()
+        if self.ret:
+            self.ret, self.frame = self.cap.read()
 
 
     def onClose(self):

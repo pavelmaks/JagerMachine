@@ -195,18 +195,18 @@ class QRCheck:#проверка правильности
         #sentinel = Random.new().read(24)
         #cipher_rsa = PKCS1_v1_5.new(private_key)
         #message = cipher_rsa.decrypt(datab64,sentinel)
-        #try:
-        key = b'YOURKEYGYOURKEYG'
-        ciphered_data = base64.b64decode(data)
-        cipher = AES.new(key, AES.MODE_ECB) # CFB mode
-        result = unpad(cipher.decrypt(ciphered_data), 16)
-        data=str(result,'utf-8')
+        try:
+            key = b'YOURKEYGYOURKEYG'
+            ciphered_data = base64.b64decode(data)
+            cipher = AES.new(key, AES.MODE_ECB) # CFB mode
+            result = unpad(cipher.decrypt(ciphered_data), 16)
+            data=str(result,'utf-8')
 
-        d = list(data)
-        '''except Exception:
+            d = list(data)
+        except Exception:
             result = -1  # incorrect
             return result
-        '''
+
         if(str(data)=="0"):
             result = -3 #admin
             return result

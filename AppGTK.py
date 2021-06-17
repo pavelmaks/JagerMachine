@@ -588,7 +588,7 @@ class AppWindow(Gtk.Window):#главная форма
             print('2')
 
         self.box.add(target)
-        self.box.activate_default()
+        self.activate_default()
         target.onOpen()
 
         #self.box.remove(target)

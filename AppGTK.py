@@ -383,10 +383,12 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
     def warningDissapear(self):
         self.warning = True
         print('startWarning')
-        time.sleep(4)
+        time.sleep(3)
         print('endWarning')
-        self.warning = False
         self.setStatusText(0)
+        time.sleep(1)
+        self.warning = False
+
 
     def startPreview(self):
         while self.update:
@@ -402,7 +404,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         while self.update:
             if self.frame is not None:
 
-                print(self.par.is_active())
+                print("qrcheck")
 
                 qrdata = self.qrdetect.detect(self.frame)
 

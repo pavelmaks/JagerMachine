@@ -9,12 +9,9 @@ from gi.repository import Gdk, Gst
 
 import Jager2 as j
 import cv2
-import numpy as np
 import threading
 import time
-import RPi.GPIO as GPIO
-import configparser
-#import VideoPlayer as vp
+
 
 
 
@@ -167,7 +164,7 @@ class InstructionBox(Gtk.Box):
 
         self.setStatusText(2)
 
-        time.sleep(10)
+        time.sleep(9)
 
         self.toIdle()
 
@@ -591,6 +588,7 @@ class AppWindow(Gtk.Window):#главная форма
             print('2')
 
         self.box.add(target)
+        self.box.activate_default(target)
         target.onOpen()
 
         #self.box.remove(target)

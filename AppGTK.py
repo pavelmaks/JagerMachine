@@ -402,7 +402,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         while self.update:
             if self.frame is not None:
 
-                print('CHECK QR')
+                print(self.par.is_active())
 
                 qrdata = self.qrdetect.detect(self.frame)
 

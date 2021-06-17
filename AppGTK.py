@@ -419,12 +419,16 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         print("Invalid code")
                         if not self.warning:
                             self.setStatusText(1)
+                            time.sleep(4)
+                            self.setStatusText(0)
                             #4 sec wait
 
                     elif qrresult == -2:
                         print("Code already used")
                         if not self.warning:
                             self.setStatusText(2)
+                            time.sleep(4)
+                            self.setStatusText(0)
                             #4 sec wait
                     elif qrresult == -3:
                         print("Admin privet")

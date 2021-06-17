@@ -2,7 +2,7 @@
 
 import sqlite3
 
-"""
+
 conn = sqlite3.connect('qrdata.db') 
 c = conn.cursor() 
 c.execute('DELETE FROM qrs;',); 
@@ -12,17 +12,17 @@ print('We have deleted', c.rowcount, 'records from the table.')
 conn.commit() 
 
 conn.close()
-"""
-conn = sqlite3.connect('qrdata.db') 
-c = conn.cursor() 
-c.execute('SELECT * FROM qrs;',);
-records = c.fetchall()
-print("Всего строк:  ", len(records))
 
-for row in records:
-    print(row[0])
-
-c.close()
+# conn = sqlite3.connect('qrdata.db')
+# c = conn.cursor()
+# c.execute('SELECT * FROM qrs;',);
+# records = c.fetchall()
+# print("Всего строк:  ", len(records))
+#
+# for row in records:
+#     print(row[0])
+#
+# c.close()
 
 
 """

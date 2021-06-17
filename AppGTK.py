@@ -472,7 +472,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         print("Code is valid")
                         self.setStatusText(3)
                         self.qrcheck.applyLast()
-                        self.update = False
+                        #self.update = False
 
                         time.sleep(0.5)
                         self.toInstruction(None)
@@ -588,7 +588,7 @@ class AppWindow(Gtk.Window):#главная форма
             print('2')
 
         self.box.add(target)
-        self.activate_default()
+
         target.onOpen()
 
         #self.box.remove(target)

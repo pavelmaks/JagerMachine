@@ -480,7 +480,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         self.toInstruction(None)
                         #Servo go
 
-            time.sleep(0.5)
+            time.sleep(1)
 
         self.qrcheck.close()
 

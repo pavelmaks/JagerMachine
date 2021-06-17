@@ -614,7 +614,7 @@ class main:
     def __init__(self): #консруктор
         self.win = AppWindow()
         self.win.connect("destroy", self.close)
-        self.win.fullscreen()
+        #self.win.fullscreen()
         self.win.openBox(None, 0)
         self.win.show_all()
         Gtk.main()

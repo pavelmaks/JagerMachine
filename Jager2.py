@@ -206,7 +206,7 @@ class QRCheck:#проверка правильности
         except Exception:
             result = -1  # incorrect
             return result
-
+        
         if(str(data)=="0"):
             result = -3 #admin
             return result

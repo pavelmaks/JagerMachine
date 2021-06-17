@@ -9,9 +9,12 @@ from gi.repository import Gdk, Gst
 
 import Jager2 as j
 import cv2
+import numpy as np
 import threading
 import time
-
+import RPi.GPIO as GPIO
+import configparser
+#import VideoPlayer as vp
 
 
 
@@ -164,7 +167,7 @@ class InstructionBox(Gtk.Box):
 
         self.setStatusText(2)
 
-        time.sleep(9)
+        time.sleep(10)
 
         self.toIdle()
 
@@ -358,19 +361,16 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
     def setStatusText(self, num):
         if num == 0: #0 = idle, 1 = invalid, 2 = used
             self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>     ПОДНЕСИТЕ QR-КОД</span>")
-            time.sleep(3)
         elif num == 1:
             self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>    QR-КОД НЕ ПОДХОДИТ</span>")
-            time.sleep(3)#threading.Thread(target=self.warningDissapear, args=()).start()
+            threading.Thread(target=self.warningDissapear, args=()).start()
         elif num == 2:
             self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='large' letter-spacing ='2300'>  QR-КОД УЖЕ БЫЛ ИСПОЛЬЗОВАН</span>")
-            time.sleep(3)#threading.Thread(target=self.warningDissapear, args=()).start()
+            threading.Thread(target=self.warningDissapear, args=()).start()
         elif num == 3:
             self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>        QR-КОД ПРИНЯТ</span>")
-            time.sleep(3)
         elif num == 4:
             self.label.set_markup("<span color='#ffffff' size='x-large'>     Admin privet</span>")
-            time.sleep(3)
         elif num == 5:
             self.label.set_markup("<span color='#ffffff' size='x-large'>     Destroy</span>")
             time.sleep(4)
@@ -386,12 +386,10 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
     def warningDissapear(self):
         self.warning = True
         print('startWarning')
-        time.sleep(3)
+        time.sleep(4)
         print('endWarning')
-        self.setStatusText(0)
-        time.sleep(1)
         self.warning = False
-
+        self.setStatusText(0)
 
     def startPreview(self):
         while self.update:
@@ -407,34 +405,33 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         while self.update:
             if self.frame is not None:
 
-                print("qrcheck")
+                print('CHECK QR')
 
                 qrdata = self.qrdetect.detect(self.frame)
 
                 if time.time()-start_time > 30:
                     self.update = False
-                    time.sleep(1)
+                    time.sleep(0.5)
                     self.toIdle(None)
 
                 if qrdata is not None:
                     qrresult = self.qrcheck.check(qrdata)
                     if qrresult == -1:
                         print("Invalid code")
-                        self.setStatusText(1)
-                        self.setStatusText(0)
-                        start_time = time.time()
+                        if not self.warning:
+                            self.setStatusText(1)
                             #4 sec wait
 
                     elif qrresult == -2:
                         print("Code already used")
-                        self.setStatusText(2)
-                        self.setStatusText(0)
-                        start_time = time.time()
+                        if not self.warning:
+                            self.setStatusText(2)
                             #4 sec wait
                     elif qrresult == -3:
                         print("Admin privet")
                         time.sleep(1)
-                        self.setStatusText(4)
+                        if not self.warning:
+                            self.setStatusText(4)
                     elif qrresult == -4:
                         global m
                         print("Destroy")
@@ -478,9 +475,9 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         print("Code is valid")
                         self.setStatusText(3)
                         self.qrcheck.applyLast()
-                        #self.update = False
+                        self.update = False
 
-                        time.sleep(3)
+                        time.sleep(0.5)
                         self.toInstruction(None)
                         #Servo go
 
@@ -497,14 +494,11 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         except Exception:
             frame = self.frame
         frame = frame[0:220, 0:360]
+        #frame = cv2.resize(frame, (800, 480))
         self.frame = frame.copy()
-        #lable = cv2.imread("./img/lab_00.png",1)
-        frame = cv2.rotate(frame, cv2.cv2.ROTATE_90_CLOCKWISE)
-        frame = cv2.flip(frame, 1)
-        frame = cv2.resize(frame, (480, 800))
-        #frame = cv2.addWeighted(frame,1,lable,1,1)
 
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frame = cv2.flip(frame,1)
 
         #overlay = cv2.imread('border.png')
         #frame = cv2.addWeighted(frame,0.8,overlay,0.1,0)
@@ -517,8 +511,8 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                                             frame.shape[0],
                                             frame.shape[2]*frame.shape[1])
 
-        #pb = pb.rotate_simple(GdkPixbuf.PixbufRotation.COUNTERCLOCKWISE)
-        #pb = pb.scale_simple(480, 800, GdkPixbuf.InterpType.NEAREST)#GdkPixbuf.InterpType.NEAREST
+        pb = pb.rotate_simple(GdkPixbuf.PixbufRotation.COUNTERCLOCKWISE)
+        pb = pb.scale_simple(480, 800, GdkPixbuf.InterpType.NEAREST)#GdkPixbuf.InterpType.NEAREST
         self.image_renderer.set_from_pixbuf(pb.copy())
 
         #try:
@@ -597,7 +591,6 @@ class AppWindow(Gtk.Window):#главная форма
             print('2')
 
         self.box.add(target)
-
         target.onOpen()
 
         #self.box.remove(target)
@@ -617,7 +610,7 @@ class main:
     def __init__(self): #консруктор
         self.win = AppWindow()
         self.win.connect("destroy", self.close)
-        #self.win.fullscreen()
+        self.win.fullscreen()
         self.win.openBox(None, 0)
         self.win.show_all()
         Gtk.main()

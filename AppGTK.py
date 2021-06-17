@@ -170,7 +170,7 @@ class InstructionBox(Gtk.Box):
 
         self.setStatusText(2)
 
-        time.sleep(20)
+        time.sleep(10)
 
         self.toIdle()
 

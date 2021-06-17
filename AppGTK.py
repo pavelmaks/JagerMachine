@@ -166,7 +166,7 @@ class InstructionBox(Gtk.Box):
 
         print('servoEnd')
         servo.hold()
-        time.sleep(1)
+        time.sleep(2)
 
         self.setStatusText(2)
 

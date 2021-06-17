@@ -358,16 +358,19 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
     def setStatusText(self, num):
         if num == 0: #0 = idle, 1 = invalid, 2 = used
             self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>     ПОДНЕСИТЕ QR-КОД</span>")
+            time.sleep(3)
         elif num == 1:
             self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>    QR-КОД НЕ ПОДХОДИТ</span>")
-            #threading.Thread(target=self.warningDissapear, args=()).start()
+            time.sleep(3)#threading.Thread(target=self.warningDissapear, args=()).start()
         elif num == 2:
             self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='large' letter-spacing ='2300'>  QR-КОД УЖЕ БЫЛ ИСПОЛЬЗОВАН</span>")
-            #threading.Thread(target=self.warningDissapear, args=()).start()
+            time.sleep(3)#threading.Thread(target=self.warningDissapear, args=()).start()
         elif num == 3:
             self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>        QR-КОД ПРИНЯТ</span>")
+            time.sleep(3)
         elif num == 4:
             self.label.set_markup("<span color='#ffffff' size='x-large'>     Admin privet</span>")
+            time.sleep(3)
         elif num == 5:
             self.label.set_markup("<span color='#ffffff' size='x-large'>     Destroy</span>")
             time.sleep(4)
@@ -410,31 +413,28 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
 
                 if time.time()-start_time > 30:
                     self.update = False
-                    time.sleep(0.5)
+                    time.sleep(1)
                     self.toIdle(None)
 
                 if qrdata is not None:
                     qrresult = self.qrcheck.check(qrdata)
                     if qrresult == -1:
                         print("Invalid code")
-                        if not self.warning:
-                            self.setStatusText(1)
-                            time.sleep(4)
-                            self.setStatusText(0)
+                        self.setStatusText(1)
+                        self.setStatusText(0)
+                        start_time = time.time()
                             #4 sec wait
 
                     elif qrresult == -2:
                         print("Code already used")
-                        if not self.warning:
-                            self.setStatusText(2)
-                            time.sleep(4)
-                            self.setStatusText(0)
+                        self.setStatusText(2)
+                        self.setStatusText(0)
+                        start_time = time.time()
                             #4 sec wait
                     elif qrresult == -3:
                         print("Admin privet")
                         time.sleep(1)
-                        if not self.warning:
-                            self.setStatusText(4)
+                        self.setStatusText(4)
                     elif qrresult == -4:
                         global m
                         print("Destroy")

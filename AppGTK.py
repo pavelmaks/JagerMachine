@@ -75,7 +75,7 @@ class InstructionBox(Gtk.Box):
     def startPreview(self):
         while self.update:
             GLib.idle_add(self.showFrame)
-            time.sleep(0.07)
+            time.sleep(0.06)
 
     def showFrame(self):  # демонстрация кадра на экран
 

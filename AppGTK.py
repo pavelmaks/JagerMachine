@@ -498,7 +498,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
             frame = self.frame
         frame = frame[0:220, 0:360]
         self.frame = frame.copy()
-        lable = cv2.imread("./img/lab_0.png",1)
+        lable = cv2.imread("./img/lab_00.png",1)
         frame = cv2.rotate(frame, cv2.cv2.ROTATE_90_CLOCKWISE)
         frame = cv2.flip(frame, 1)
         frame = cv2.resize(frame, (480, 800))

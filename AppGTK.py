@@ -84,6 +84,7 @@ class InstructionBox(Gtk.Box):
         while (self.ret == False):
             self.cap.release()
             self.cap = cv2.VideoCapture(self.target)
+            print(self.target)
             self.ret, self.frame = self.cap.read()
         frame = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
         pb = GdkPixbuf.Pixbuf.new_from_data(frame.tostring(),

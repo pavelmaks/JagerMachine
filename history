@@ -1,0 +1,284 @@
+    1  nwcviewer
+    2  vncserver
+    3  hostname -I
+    4  sudo apt-get install xserver-xorg-input-evdev
+    5  sudo cp -rg /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf
+    6  sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf
+    7  sudo apt-get install -y xinput-calibrator 
+    8  sudo DISPLAY=:0.0 xinput_calibrator
+    9  sudo nano /usr/share/X11/xorg.conf.d/40-libinput.conf 
+    10  sudo reboot
+    11  vncserver
+    12  sudo DISPLAY=:0.0 xinput_calibrator
+    13  sudo apt-get install matchbox-keyboard
+    14  vncserver
+    15  sudo DISPLAY=:0.0 xinput_calibrator
+    16  sudo nano /usr/share/X11/xorg.conf.d/40-libinput.conf 
+    17  sudo reboot
+    18  raspistill -t 10000
+    19  vncserver
+    20  python2
+    21  vncserver
+    22  pip install imutils
+    23  pip install --upgrade imutils
+    24  pip install imutils
+    25  sudo pip3 install imutils
+    26  vncserver
+    27  g=
+    28  sudo nano /boot/config.txt
+    29  sudo reboot
+    30  vncserver
+    31  sudo nano /boot/config.txt
+    32  sudo reboot
+    33  vncserver
+    34  sudo nano /boot/config.txt
+    35  sudo reboot
+    36  vncserver
+    37  sudo nano /boot/config.txt
+    38  sudo reboot
+    39  vncserver
+    40  sudo nano /etc/modules
+    41  cd /usr/share/X11/xorg.conf.d/
+    42  ls
+    43  sudo nano 10-evdev.conf 
+    44  sudo reboot
+    45  vncserver
+    46  sudo apt-get install python3-pyqt5 pyqt5-dev-tools
+    47  sudo apt-get install python3-pyqt5
+    48  vncservver
+    49  vncserver
+    50  sudo find / -name libEGL*
+    51  sudo find / -name libGLESv2*
+    52  sudo ln -fs /opt/vc/lib/libEGL.so /usr/lib/arm-linux-gnueabihf/libEGL.so
+    53  sudo ln -fs /opt/vc/lib/libEGL.so /usr/lib/arm-linux-gnueabihf/libEGL.so.1
+    54  sudo ln -fs /opt/vc/lib/libGLESv2.so /usr/lib/arm-linux-gnueabihf/libGLESv2.so
+    55  sudo ln -fs /opt/vc/lib/libGLESv2.so /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2
+    56  sudo ldconfig
+    57  sudo find /-name libEGL*
+    58  sudo find / -name libEGL*
+    59  sudo -s
+    60  mkdir qt-build
+    61  cd qt-build/
+    62  ../configure -opensource -static -confirm-license -release -nomake examples -openssl-runtime -prefix /usr
+    63  sudo ln -s /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2 /usr/lib/arm-linux-gnueabihf/libGLESv2.so
+    64  sudo find / -name libEGL* -type f - exec ls -la{} \;
+    65  sudo find / -name libEGL* -type f -exec ls -la {} \;
+    66  sudo ln -fs /opt/vc/lib/libEGL.so /usr/lib/arm-linux-gnueabihf/libEGL.so
+    67  sudo ln -fs /opt/vc/lib/libGLESv2.so /usr/lib/arm-linux-gnueabihf/libGLESv2.so
+    68  ldconfig
+    69  sudo ldconfig
+    70  sudo sudo ln -s /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2 /usr/lib/arm-linux-gnueabihf/libGLESv2.so
+    71  sudo ln -s /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2 /usr/lib/arm-linux-gnueabihf/libGLESv2.so
+    72  sudo apt-get build-dep qt5-default
+    73  sudo apt-get update -y
+    74  sudo apt-get install -y libegl-mesa0
+    75  sudo find / -name libEGL* -type f -exec ls -la {} \;
+    76  vncserver
+    77  sudo raspi-config
+    78  raspi-config
+    79  sudo raspi-config
+    80  vncserver
+    81  sudo apt-get install sqlite3
+    82  sqlite3 qrdata.db
+    83  cd ./Documents/
+    84  sqlite3 qrdata.db
+    85  qrlite3 qrdata.db
+    86  sqlite3 qrdata.db
+    87  cd .config
+    88  mkdir autostart
+    89  cd autostart/
+    90  nano tightvnc.desktop
+    91  ls
+    92  vncserver
+    93  sudo python3
+    94  sudo nano /boot/config.txt
+    95  cd/usr/share/X11/xorg.conf.d/
+    96  cd /usr/share/X11/xorg.conf.d/
+    97  ls
+    98  nano 10-evdev.conf 
+    99  sudo nano 10-evdev.conf 
+    100  cd /usr/share/
+    101  cd /usr/share/X11/xorg.conf.d/
+    102  ls
+    103  nano 10-evdev.conf 
+    104  nano 45-evdev.conf 
+    105  nano 40-libinput.conf 
+    106  nano 10-evdev.conf 
+    107  sudo nano 10-evdev.conf 
+    108  sudo raspi-config
+    109  sudo nano /etc/profile
+    110  sudo reboot
+    111  sudo nano /etc/profile
+    112  sudo reboot
+    113  sudo nano /etc/profile
+    114  sudo python3 '/home/pi/Docments/AppGTK.py'
+    115  sudo python3 /home/pi/Docments/AppGTK.py
+    116  sudo python3 /home/pi/Documents/AppGTK.py
+    117  sudo python /home/pi/Documents/AppGTK.py
+    118  sudo python3 /home/pi/Documents/AppGTK.py
+    119  python -m pip install --user opencv-contrib-python
+    120  python3 -m pip install --user opencv-contrib-python
+    121  sudo python3 /home/pi/Documents/AppGTK.py
+    122  cd /home/pi/Documents/
+    123  chmod +x AppGTK.py
+    124  python3 AppGTK.py
+    125  cd ../
+    126  sudo python3 /home/pi/Documents/AppGTK.py
+    127  cd /home/pi/Documents/
+    128  sudo python3 AppGTK.py
+    129  python3 AppGTK.py
+    130  cd ../
+    131  python3 /home/pi/Documents/AppGTK.py
+    132  sudo nano /etc/profile
+    133  reboot
+    134  startx
+    135  sudo nano /etc/profile
+    136  reboot
+    137  sudo nano /etc/profile
+    138  reboot
+    139  sudo nano /etc/profile
+    140  reboot
+    141  startx
+    142  raspi-config 
+    143  sudo raspi-config
+    144  cd /home/pi/Documents/
+    145  python3 AppGTK.py
+    146  cd /
+    147  sudo crontab =e
+    148  sudo crontab -e
+    149  reboot
+    150  sh /home/pi/Desktop/Jager.sh >/home/pi/logs/jaggerlog 2>&1
+    151  sudo sh /home/pi/Desktop/Jager.sh >/home/pi/logs/jaggerlog 2>&1
+    152  cd /log
+    153  cd /logs
+    154  cd /home/pi/log
+    155  cd /home/pi/logs
+    156  cat jaggerlog 
+    157  reboot
+    158  cd logs
+    159  cat jaggerlog 
+    160  sudo crontab -e
+    161  cd /home/pi/logs
+    162  cat jaggerlog 
+    163  reboot
+    164  cd /home/pi/logs
+    165  cat jaggerlog 
+    166  sudo crontab -e
+    167  reboot
+    168  cd /home/pi/logs
+    169  cat jaggerlog 
+    170  sudo crontab -e
+    171  reboot
+    172  cd /home/pi/logs
+    173  cat jaggerlog 
+    174  sudo crontab -e
+    175  reboot
+    176  xvfb
+    177  sudo apt-get install xvfb
+    178  cd /home/pi/logs
+    179  cat jaggerlog 
+    180  reboot
+    181  cd /home/pi/logs
+    182  cat jaggerlog 
+    183  sudo crontab -e
+    184  reboot
+    185  cd /home/pi/logs
+    186  sudo crontab -e
+    187  cat jaggerlog 
+    188  sudo apt-get install at-spi2-core
+    189  reboot
+    190  cd /home/pi/logs
+    191  cat jaggerlog 
+    192  crontab -e
+    193  sudo crontab -e
+    194  crontab -e
+    195  sudo crontab -e
+    196  reboot
+    197  cd /home/pi/logs
+    198  cat jaggerlog 
+    199  crontab -e
+    200  crontab -e -u pi
+    201  reboot
+    202  cd /home/pi/logs
+    203  cat jaggerlog 
+    204  crontab -e
+    205  reboot
+    206  cd /home/pi/logs
+    207  cat jaggerlog 
+    208  crontab -e
+    209  sudo crontab -e
+    210  sudo cd crontabs/
+    211  cd crontabs/
+    212  cd sudo crontabs/
+    213  sudo crontabs/
+    214  sudo cd crontabs/
+    215  sudo su
+    216  service cron status
+    217  su -pi
+    218  su pi
+    219  su
+    220  su root
+    221  sudo -i
+    222  cd /home/pi/logs
+    223  cat jaggerlog 
+    224  sudo crontab -e
+    225  reboot
+    226  cd /home/pi/logs
+    227  cat jaggerlog 
+    228  cd /
+    229  cd /home/pi/Documents/
+    230  sudo python3 AptGTK.py
+    231  sudo python3 AppGTK.py
+    232  sudo -E python3 AppGTK.py
+    233  sudo crontab -e
+    234  reboot
+    235  cd /home/pi/logs
+    236  cat jaggerlog 
+    237  sudo crontab -e
+    238  reboot
+    239  cd /home/pi/logs
+    240  sudo crontab -e
+    241  cat jaggerlog 
+    242  sudo crontab -e
+    243  reboot
+    244  cd /home/pi/logs
+    245  cat jaggerlog 
+    246  sudo crontab -e
+    247  reboot
+    248  sudo pip freeze
+    249  pip freeze
+    250  sudo apt remove python3-opencv
+    251  sudo apt remove python-opencv
+    252  sudo apt install python3-opencv
+    253  sudo crontab -e
+    254  reboot
+    255  cd /home/pi/logs/
+    256  cat jaggerlog 
+    257  nano jaggerlog 
+    258  cat jaggerlog 
+    259  sudo crontab -e
+    260  reboot
+    261  cd /home/pi/logs/
+    262  cat jaggerlog 
+    263  cd /home/pi/logs/
+    264  cat jaggerlog 
+    265  sudo crontab -e
+    266  reboot
+    267  cd /home/pi/logs/
+    268  cat jaggerlog 
+    269  sudo crontab -e
+    270  crontab -e
+    271  /cd
+    272  cd /
+    273  nano /etc/lightdm.conf
+    274  sudo nano /etc/lightdm.conf
+    275  reboot
+    276  sudo nano /etc/lightdm/lightdm.conf
+    277  reboot
+    278  sudo nano /etc/lightdm/lightdm.conf
+    279  reboot
+    280  crontab -e
+    281  sudo crontab -e
+    282  reboot
+    283  history
+    pi@raspberrypi:~ $ ^C

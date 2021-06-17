@@ -395,7 +395,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         while self.update:
             GLib.idle_add(self.showFrame)
             self.par.present()
-            time.sleep(0.1)
+            time.sleep(0.15)
 
     def qrCheck(self):#функция проверки qr кода и выдачи результата
 

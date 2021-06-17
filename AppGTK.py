@@ -295,7 +295,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         self.image_renderer = Gtk.Image.new_from_pixbuf(self.image)
         self.stack.add_overlay(self.image_renderer)
 
-        '''####LABEL
+        ####LABEL
         labelfixed = Gtk.Fixed()
         self.stack.add_overlay(labelfixed)
 
@@ -310,7 +310,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         #self.label.set_valign(15)
         #self.label.set_valign()
         labelbox.add(self.label)
-        labelfixed.put(labelbox, 0, 0)'''
+        labelfixed.put(labelbox, 0, 0)
 
         self.update = False
         ###LABEL END
@@ -356,7 +356,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         print('toInstruction')
 
     def setStatusText(self, num):
-        '''if num == 0: #0 = idle, 1 = invalid, 2 = used
+        if num == 0: #0 = idle, 1 = invalid, 2 = used
             self.label.set_markup("<span font='Montserrat' foreground='#ebe6c0' weight='heavy' size='xx-large' letter-spacing ='2300'>     ПОДНЕСИТЕ QR-КОД</span>")
             time.sleep(3)
         elif num == 1:
@@ -379,7 +379,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
             time.sleep(3)
         elif num > 6:
             self.label.set_markup("<span color='#ffffff' size='x-large'>     Проливка "+str(num)+" секунд</span>")
-            time.sleep(3)'''
+            time.sleep(3)
 
 
 
@@ -498,11 +498,11 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
             frame = self.frame
         frame = frame[0:220, 0:360]
         self.frame = frame.copy()
-        lable = cv2.imread("./img/lab_00.png",1)
+        #lable = cv2.imread("./img/lab_00.png",1)
         frame = cv2.rotate(frame, cv2.cv2.ROTATE_90_CLOCKWISE)
         frame = cv2.flip(frame, 1)
         frame = cv2.resize(frame, (480, 800))
-        frame = cv2.addWeighted(frame,1,lable,1,1)
+        #frame = cv2.addWeighted(frame,1,lable,1,1)
 
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 

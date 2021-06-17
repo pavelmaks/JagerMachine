@@ -81,7 +81,7 @@ class InstructionBox(Gtk.Box):
 
         # print('tick')
 
-        while (self.ret == False):
+        while not self.ret:
             self.cap.release()
             self.cap = cv2.VideoCapture(self.target)
             print(self.target)

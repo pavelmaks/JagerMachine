@@ -498,7 +498,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
             frame = self.frame
         frame = frame[0:220, 0:360]
         frame = cv2.flip(frame, 0)
-        frame = cv2.resize(frame, (800, 480))
+        frame = cv2.resize(frame, (480, 800))
         self.frame = frame.copy()
 
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)

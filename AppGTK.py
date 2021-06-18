@@ -409,11 +409,11 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         while self.update:
             if self.frame is not None:
 
-                print('CHECK QR',time.time()-start_time)
+                print('CHECK QR',time.time()-start_time )
 
                 qrdata = self.qrdetect.detect(self.frame)
 
-                if time.time()-start_time > 3600:
+                if time.time()-start_time > 30:
                     self.update = False
                     time.sleep(0.5)
                     self.toIdle(None)
@@ -424,14 +424,14 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                         print("Invalid code")
                         if not self.warning:
                             self.setStatusText(1)
-                            #start_time = time.time()
+                            start_time = time.time()
                             #4 sec wait
 
                     elif qrresult == -2:
                         print("Code already used")
                         if not self.warning:
                             self.setStatusText(2)
-                            #start_time = time.time()
+                            start_time = time.time()
                             #4 sec wait
                     elif qrresult == -3:
                         print("Admin privet")
@@ -616,7 +616,7 @@ class main:
     def __init__(self): #консруктор
         self.win = AppWindow()
         self.win.connect("destroy", self.close)
-        #self.win.fullscreen()
+        self.win.fullscreen()
         self.win.openBox(None, 0)
         self.win.show_all()
         Gtk.main()

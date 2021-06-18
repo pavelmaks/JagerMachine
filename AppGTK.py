@@ -496,20 +496,20 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
 
     def showFrame(self):#демонстрация кадра на экран
 
-        #print('tick')
+        print(000)
         try:
             frame = self.camera.getFrame()
         except Exception:
             frame = self.frame
-        frame = frame[0:216, 0:360]
+        frame = frame[0:220, 0:360]
         print(frame.size)
         self.frame = frame.copy()
         frame = cv2.resize(frame, (800, 480))
         frame = cv2.rotate(frame, cv2.cv2.ROTATE_90_CLOCKWISE)
-
+        print(222)
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         frame = cv2.flip(frame,1)
-
+        print(333)
         #overlay = cv2.imread('border.png')
         #frame = cv2.addWeighted(frame,0.8,overlay,0.1,0)
 
@@ -520,9 +520,9 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                                             frame.shape[1],
                                             frame.shape[0],
                                             frame.shape[2]*frame.shape[1])
-
+        print(333)
         self.image_renderer.set_from_pixbuf(pb.copy())
-
+        print(444)
         #try:
             #while not self.stopEvent.is_set():
 

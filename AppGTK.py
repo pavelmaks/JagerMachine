@@ -501,7 +501,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
             frame = self.camera.getFrame()
         except Exception:
             frame = self.frame
-        frame = frame[0:220, 0:360]
+        frame = frame[0:216, 0:360]
         print(frame.size)
         self.frame = frame.copy()
         frame = cv2.resize(frame, (800, 480))

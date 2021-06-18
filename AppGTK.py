@@ -502,6 +502,7 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         except Exception:
             frame = self.frame
         #frame = frame[0:220, 0:360]
+        print(frame.size)
         self.frame = frame.copy()
         frame = cv2.resize(frame, (800, 480))
         frame = cv2.rotate(frame, cv2.cv2.ROTATE_90_CLOCKWISE)

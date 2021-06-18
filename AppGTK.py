@@ -497,10 +497,10 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
     def showFrame(self):#демонстрация кадра на экран
 
         print(000)
-        try:
-            frame = self.camera.getFrame()
-        except Exception:
-            frame = self.frame
+        #try:
+        frame = self.camera.getFrame()
+        #except Exception:
+            #frame = self.frame
         frame = frame[0:216, 0:360]
         print(frame.size)
         self.frame = frame.copy()
@@ -523,7 +523,6 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         print(333)
         self.image_renderer.set_from_pixbuf(pb.copy())
         print(444)
-        return True
         #try:
             #while not self.stopEvent.is_set():
 

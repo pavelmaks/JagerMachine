@@ -107,6 +107,7 @@ class InstructionBox(Gtk.Box):
 
     def setStatusText(self, num):#изменение фона и надписей
         print(num)
+        self.cap.release()
         if num == 0: #0 = idle, 1 = invalid, 2 = used
             self.target="./video/v2.mp4"
             self.ret = False

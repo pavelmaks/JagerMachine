@@ -502,8 +502,9 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
         except Exception:
             frame = self.frame
         frame = frame[0:220, 0:360]
-        #frame = cv2.resize(frame, (800, 480))
         self.frame = frame.copy()
+        frame = cv2.resize(frame, (800, 480))
+        frame = cv2.rotate(frame, cv2.cv2.ROTATE_90_CLOCKWISE)
 
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         frame = cv2.flip(frame,1)
@@ -519,8 +520,6 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
                                             frame.shape[0],
                                             frame.shape[2]*frame.shape[1])
 
-        pb = pb.rotate_simple(GdkPixbuf.PixbufRotation.COUNTERCLOCKWISE)
-        pb = pb.scale_simple(480, 800, GdkPixbuf.InterpType.NEAREST)#GdkPixbuf.InterpType.NEAREST
         self.image_renderer.set_from_pixbuf(pb.copy())
 
         #try:

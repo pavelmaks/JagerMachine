@@ -143,7 +143,7 @@ class InstructionBox(Gtk.Box):
         print(20)
         self.busy = True
         print(21)
-        self.servoAct()
+        threading.Thread(target=self.servoAct, args=()).start()
 
     def servoAct(self):#запуск налива и возвращение в первую форму
         print(22)

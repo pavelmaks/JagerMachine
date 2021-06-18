@@ -239,7 +239,7 @@ class IdleBox(Gtk.Box):#стартовая форма
 
     def startPreview(self):
         while self.update:
-            GLib.idle_add(self.showFrame)
+            self.showFrame()
             time.sleep(0.07)
 
 

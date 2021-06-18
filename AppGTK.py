@@ -167,8 +167,9 @@ class InstructionBox(Gtk.Box):
         print('servoEnd')
         servo.hold()
         time.sleep(2)
-
-        self.setStatusText(2)
+        self.target = "./video/v4.mp4"
+        self.ret = False
+        #self.setStatusText(2)
         print(self.target)
         time.sleep(10)
 

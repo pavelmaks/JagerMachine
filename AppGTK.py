@@ -497,10 +497,10 @@ class ScannerBox(Gtk.Box):#форма сканирования qr кода
     def showFrame(self):#демонстрация кадра на экран
 
         print(000)
-        #try:
-        frame = self.camera.getFrame()
-        #except Exception:
-            #frame = self.frame
+        try:
+            frame = self.camera.getFrame()
+        except Exception:
+            frame = self.frame
         frame = frame[0:216, 0:360]
         print(frame.size)
         self.frame = frame.copy()
@@ -618,7 +618,7 @@ class main:
     def __init__(self): #консруктор
         self.win = AppWindow()
         self.win.connect("destroy", self.close)
-        #self.win.fullscreen()
+        self.win.fullscreen()
         self.win.openBox(None, 0)
         self.win.show_all()
         Gtk.main()

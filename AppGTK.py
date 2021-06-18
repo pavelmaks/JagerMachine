@@ -139,11 +139,13 @@ class InstructionBox(Gtk.Box):
         if self.busy:
             return
         print(19)
+        self.busy = True
         self.setStatusText(1)
         print(20)
         self.busy = True
         print(21)
-        threading.Thread(target=self.servoAct, args=()).start()
+        #threading.Thread(target=self.servoAct, args=()).start()
+        self.servoAct()
 
     def servoAct(self):#запуск налива и возвращение в первую форму
         print(22)
@@ -617,6 +619,7 @@ class main:
         self.win = AppWindow()
         self.win.connect("destroy", self.close)
         self.win.fullscreen()
+        time.sleep(120)
         self.win.openBox(None, 0)
         self.win.show_all()
         Gtk.main()

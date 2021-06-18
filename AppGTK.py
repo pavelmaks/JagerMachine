@@ -139,13 +139,11 @@ class InstructionBox(Gtk.Box):
         if self.busy:
             return
         print(19)
-        self.busy = True
         self.setStatusText(1)
         print(20)
         self.busy = True
         print(21)
-        #threading.Thread(target=self.servoAct, args=()).start()
-        self.servoAct()
+        threading.Thread(target=self.servoAct, args=()).start()
 
     def servoAct(self):#запуск налива и возвращение в первую форму
         print(22)
@@ -171,7 +169,7 @@ class InstructionBox(Gtk.Box):
         time.sleep(2)
 
         self.setStatusText(2)
-
+        print(self.target)
         time.sleep(10)
 
         self.toIdle()
